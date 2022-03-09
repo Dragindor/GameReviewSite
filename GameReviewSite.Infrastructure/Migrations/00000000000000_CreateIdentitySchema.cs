@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using System;
 
-namespace GameReviewSite.Data.Migrations
+namespace GameReviewSite.Infrastructure.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
