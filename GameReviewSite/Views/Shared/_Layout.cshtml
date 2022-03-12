@@ -40,7 +40,7 @@
 				<img src="~/img/logo.png" alt="">
 			</a>
 			<div class="user-panel">
-				<a href="Areas\Identity\Pages\Account\Login.cshtml">Login</a> / <a href="/Login.cshtml">Register</a>
+				<a href="#">Login</a> / <a href="#">Register</a>
 			</div>
 			<!-- responsive -->
 			<div class="nav-switch">
@@ -56,6 +56,12 @@
 					<li><a href="~/contact.html">Contact</a></li>
 				</ul>
 			</nav>
+			<li class="nav-item">
+                        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
+                            <i class="fas fa-door-open"></i>
+                            <button type="submit" class="nav-link btn btn-link text-dark">Log Out</button>
+                        </form>
+             </li>
 		</div>
 	</header>
 	<!-- Header section end -->
