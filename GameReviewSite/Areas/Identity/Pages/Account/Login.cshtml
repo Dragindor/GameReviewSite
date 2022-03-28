@@ -11,7 +11,7 @@
         <section>
             <form id="account" method="post">
                 <h2>Use a local account to log in.</h2>
-                <hr />
+                <hr/>
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
                     <label asp-for="Input.Email" class="form-label"></label>
@@ -23,7 +23,7 @@
                     <input asp-for="Input.Password" class="form-control" autocomplete="current-password" aria-required="true" />                   
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
-                <div>
+                <div class="row" style="margin-left: 20px;">
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe" class="form-label">
                             <input class="form-check-input" asp-for="Input.RememberMe" />
