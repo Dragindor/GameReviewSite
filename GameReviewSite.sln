@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameReviewSite.Core", "Game
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameReviewSite.Infrastructure", "GameReviewSite.Infrastructure\GameReviewSite.Infrastructure.csproj", "{8104687D-5065-47D5-9E62-3AFD411BE9FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameReviewSite.Api", "GameReviewSite.Api\GameReviewSite.Api.csproj", "{AF516CF5-6279-444D-9050-3F8BA22877F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameReviewSite.Api", "GameReviewSite.Api\GameReviewSite.Api.csproj", "{AF516CF5-6279-444D-9050-3F8BA22877F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SiteTests", "SiteTests\SiteTests.csproj", "{AFE07061-94F0-45B3-929B-1955C8928A22}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{AF516CF5-6279-444D-9050-3F8BA22877F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF516CF5-6279-444D-9050-3F8BA22877F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF516CF5-6279-444D-9050-3F8BA22877F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFE07061-94F0-45B3-929B-1955C8928A22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFE07061-94F0-45B3-929B-1955C8928A22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFE07061-94F0-45B3-929B-1955C8928A22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFE07061-94F0-45B3-929B-1955C8928A22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,64 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace GameReviewSite.Infrastructure.Data
+{
+    public class Game
+    {
+        public Game()
+        {
+            this.Reviews = new HashSet<Review>();
+            //this.Reviews = new HashSet<Review>();
+        }
+        [Key]
+        public Guid Id { get; set; } = Guid.NewGuid();
+
+        [Required]
+        [StringLength(100)]
+        public string Name { get; set; }
+
+        //public string Image { get; set; }
+        //public string video { get; set; }
+
+        [Required]
+        [Range(0.00, 10.00)]
+        public double Rating { get; set; }
+
+        [Required]
+        [Range(0.00,999.99)]
+        public double Price { get; set; }
+
+        [Required]
+        [StringLength(1000)]
+        public string Description { get; set; }
+        
+        [Required]
+        [StringLength(100)]
+        public string Developer { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string publisher { get; set; }
+
+        [Required]
+        [StringLength(10)]
+        public string ReleaseDate { get; set; }
+        
+        [Required]
+        [StringLength(100)]
+        public string Dlc { get; set; }
+
+        [Required]
+        [StringLength(300)]
+        public string SystemRequirements { get; set; }
+
+        //public ICollection<Tag> Tags { get; set; }
+
+        public ICollection<Review> Reviews { get; set; }
+
+    }
+}
