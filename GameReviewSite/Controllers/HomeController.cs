@@ -1,22 +1,45 @@
-﻿ using GameReviewSite.Models;
+﻿using GameReviewSite.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using System.Diagnostics;
 
 namespace GameReviewSite.Controllers
 {
     public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<HomeController> logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IDistributedCache cache;
+        public HomeController(ILogger<HomeController> _logger, IDistributedCache _cache)
         {
-            _logger = logger;
+            logger = _logger;
+            cache = _cache;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            DateTime dateTime = DateTime.Now;
+            var cachedData = await cache.GetStringAsync("cachedTime");
+        
+            if (cachedData == null)
+            {
+                cachedData = dateTime.ToString();
+                DistributedCacheEntryOptions distributedCacheOptions = new DistributedCacheEntryOptions()
+                {
+                    SlidingExpiration = TimeSpan.FromSeconds(45),
+                    AbsoluteExpiration = DateTime.Now.AddSeconds(90)
+                };
+        
+                await cache.SetStringAsync("cachedTime", cachedData, distributedCacheOptions);
+            }
+        
+            return View(nameof(Index), cachedData);
         }
+
+        //public IActionResult Index()
+        //{
+        //    return View();
+        //}
 
         public IActionResult Privacy()
         {
