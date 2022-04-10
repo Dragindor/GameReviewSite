@@ -12,10 +12,10 @@ namespace GameReviewSite.Infrastructure.Data
         public Game()
         {
             this.Reviews = new HashSet<Review>();
-            //this.Reviews = new HashSet<Review>();
+            this.Tags = new HashSet<Tag>();
         }
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [StringLength(100)]
@@ -56,7 +56,7 @@ namespace GameReviewSite.Infrastructure.Data
         [StringLength(300)]
         public string SystemRequirements { get; set; }
 
-        //public ICollection<Tag> Tags { get; set; }
+        public ICollection<Tag> Tags { get; set; }
 
         public ICollection<Review> Reviews { get; set; }
 

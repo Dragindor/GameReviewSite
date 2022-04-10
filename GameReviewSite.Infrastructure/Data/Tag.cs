@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace GameReviewSite.Infrastructure.Data
 {
-    public class User
+    public class Tag
     {
+        public Tag()
+        {
+            this.Games = new HashSet<Game>();
+        }
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
-        [Required]
-        [StringLength(100)]
-        public string UserName { get; set; }
-
-
+        public ICollection<Game> Games { get; set; }
     }
 }

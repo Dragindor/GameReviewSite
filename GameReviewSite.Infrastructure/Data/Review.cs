@@ -5,24 +5,35 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Warehouse.Infrastructure.Data.Identity;
 
 namespace GameReviewSite.Infrastructure.Data
 {
     public class Review
     {
+        public Review()
+        {
+            this.Comments= new HashSet<Comment>();
+        }
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; }
 
-        [Required]
-        [ForeignKey(nameof(Game))]
-        public int GameId { get; set; }
-        public Game Game { get; set; }
+        public ApplicationUser User { get; set; }
+ 
+        //[Required]
+        //public string GameId { get; set; }
+        //
+        //[ForeignKey(nameof(GameId))]
+        //public Game Game { get; set; }
+ 
         
+        [Required]
+        public string Date { get; set; }
+
         [Required]
         [StringLength(1000)]
         public string Description { get; set; }
@@ -30,5 +41,7 @@ namespace GameReviewSite.Infrastructure.Data
         [Required]
         [Range(0.00, 10.00)]
         public double Rating { get; set; }
+
+        public ICollection<Comment> Comments { get; set; }
     }
 }

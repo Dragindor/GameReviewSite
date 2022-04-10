@@ -5,23 +5,29 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Warehouse.Infrastructure.Data.Identity;
 
 namespace GameReviewSite.Infrastructure.Data
 {
     public class Comment
     {
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public string Id { get; set; } = Guid.NewGuid().ToString();
 
         [Required]
         [ForeignKey(nameof(User))]
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; }       
+        
+        public ApplicationUser User { get; set; }
+
+       //[Required]       
+       //public string ReviewId { get; set; }
+       //
+       //[ForeignKey(nameof(ReviewId))]
+       //public Review Review { get; set; }
 
         [Required]
-        [ForeignKey(nameof(Review))]
-        public int ReviewId { get; set; }
-        public Review Review { get; set; }
+        public string Date { get; set; }
 
         [Required]
         [StringLength(100)]
