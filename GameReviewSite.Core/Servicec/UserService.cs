@@ -8,5 +8,6 @@ namespace GameReviewSite.Core.Servicec
 {
     public class UserService
     {
+
     }
 }

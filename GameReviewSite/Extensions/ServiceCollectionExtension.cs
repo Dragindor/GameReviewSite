@@ -1,9 +1,7 @@
 ﻿using GameReviewSite.Infrastructure.Data;
+using GameReviewSite.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Warehouse.Core.Contracts;
-using Warehouse.Core.Services;
-using Warehouse.Infrastructure.Data;
-using Warehouse.Infrastructure.Data.Repositories;
+
 
 namespace Microsoft.Extensions.DependencyInjection
 {

@@ -1,8 +1,9 @@
 using GameReviewSite.Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Warehouse.Core.Constants;
-using Warehouse.ModelBinders;
+using GameReviewSite.Core.Constants;
+using GameReviewSite.Infrastructure.Data.Identity;
+using GameReviewSite.ModelBinders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,12 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
 builder.Services.AddApplicationDbContexts(builder.Configuration);
-//builder.Services.AddDefaultIdentity<ApplicationUser>(options=>
-//{
-//    options.SignIn.RequireConfirmedAccount = true;
-//})
-//    .AddRoles<IdentityRole>()
-//    .AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options=>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+})
+    .AddRoles<IdentityRole>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));

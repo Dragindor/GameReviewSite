@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Warehouse.Infrastructure.Data.Identity;
+using GameReviewSite.Infrastructure.Data.Identity;
 
 namespace GameReviewSite.Infrastructure.Data
 {

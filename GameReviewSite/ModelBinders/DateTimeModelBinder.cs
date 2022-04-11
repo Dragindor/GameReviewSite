@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Globalization;
 
-namespace Warehouse.ModelBinders
+namespace GameReviewSite.ModelBinders
 {
     public class DateTimeModelBinder : IModelBinder
     {

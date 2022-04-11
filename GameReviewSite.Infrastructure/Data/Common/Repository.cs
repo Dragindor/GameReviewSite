@@ -6,7 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Warehouse.Infrastructure.Data.Common
+namespace GameReviewSite.Infrastructure.Data.Common
 {
     /// <summary>
     /// Implementation of repository access methods

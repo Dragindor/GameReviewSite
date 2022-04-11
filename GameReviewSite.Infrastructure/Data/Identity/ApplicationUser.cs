@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
 
-namespace Warehouse.Infrastructure.Data.Identity
+namespace GameReviewSite.Infrastructure.Data.Identity
 {
     public class ApplicationUser : IdentityUser
     {

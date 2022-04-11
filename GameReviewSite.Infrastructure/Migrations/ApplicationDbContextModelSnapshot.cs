@@ -369,7 +369,7 @@ namespace GameReviewSite.Infrastructure.Migrations
                     b.ToTable("UserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Warehouse.Infrastructure.Data.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("GameReviewSite.Infrastructure.Data.Identity.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -390,7 +390,7 @@ namespace GameReviewSite.Infrastructure.Migrations
                         .WithMany("Comments")
                         .HasForeignKey("ReviewId");
 
-                    b.HasOne("Warehouse.Infrastructure.Data.Identity.ApplicationUser", "User")
+                    b.HasOne("GameReviewSite.Infrastructure.Data.Identity.ApplicationUser", "User")
                         .WithMany("Comments")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -405,7 +405,7 @@ namespace GameReviewSite.Infrastructure.Migrations
                         .WithMany("Reviews")
                         .HasForeignKey("GameId");
 
-                    b.HasOne("Warehouse.Infrastructure.Data.Identity.ApplicationUser", "User")
+                    b.HasOne("GameReviewSite.Infrastructure.Data.Identity.ApplicationUser", "User")
                         .WithMany("Reviews")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -490,7 +490,7 @@ namespace GameReviewSite.Infrastructure.Migrations
                     b.Navigation("Comments");
                 });
 
-            modelBuilder.Entity("Warehouse.Infrastructure.Data.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("GameReviewSite.Infrastructure.Data.Identity.ApplicationUser", b =>
                 {
                     b.Navigation("Comments");
 

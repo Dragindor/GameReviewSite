@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace Warehouse.ModelBinders
+namespace GameReviewSite.ModelBinders
 {
     public class DecimalModelBinderProvider : IModelBinderProvider
     {

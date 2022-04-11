@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Warehouse.Core.Constants
+namespace GameReviewSite.Core.Constants
 {
     public class FormatingConstant
     {

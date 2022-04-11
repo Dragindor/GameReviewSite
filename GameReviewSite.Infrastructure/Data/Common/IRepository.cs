@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Warehouse.Infrastructure.Data.Common
+namespace GameReviewSite.Infrastructure.Data.Common
 {
     /// <summary>
     /// Abstraction of repository access methods

@@ -1,4 +1,4 @@
-﻿namespace Warehouse.Core.Constants
+﻿namespace GameReviewSite.Core.Constants
 {
     public static class MessageConstant
     {
