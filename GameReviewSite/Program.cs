@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-//builder.Services.AddApplicationDbContexts(builder.Configuration);
+builder.Services.AddApplicationDbContexts(builder.Configuration);
 //builder.Services.AddDefaultIdentity<ApplicationUser>(options=>
 //{
 //    options.SignIn.RequireConfirmedAccount = true;
