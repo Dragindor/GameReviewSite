@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Warehouse.Infrastructure.Data.Identity;
 
 namespace GameReviewSite.Infrastructure.Data
 {
@@ -14,22 +13,6 @@ namespace GameReviewSite.Infrastructure.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           //modelBuilder.Entity<Comment>()
-           //    .HasOne<ApplicationUser>(x => x.User)
-           //.WithMany(g => g.Comments)
-           //.HasForeignKey(s => s.UserId)
-           //.OnDelete(DeleteBehavior.NoAction);
-           //
-           //modelBuilder.Entity<Comment>()
-           //    .HasOne<Review>(x => x.Review)
-           //.WithMany(g => g.Comments)
-           //.HasForeignKey(s => s.ReviewId);
-           //
-           //modelBuilder.Entity<ApplicationUser>()
-           //    .HasMany<Comment>(x => x.Comments)
-           //    .WithOne()
-           //    .HasForeignKey(x => x.ReviewId)
-           //    .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);            
             modelBuilder.Entity<IdentityUser>(entity =>
