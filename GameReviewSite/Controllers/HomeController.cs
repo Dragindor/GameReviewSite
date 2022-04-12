@@ -41,6 +41,21 @@ namespace GameReviewSite.Controllers
             return View();
         }
 
+        public IActionResult Reviews()
+        {
+            return View();
+        }
+
+        public IActionResult Categories()
+        {
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();
