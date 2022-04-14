@@ -35,12 +35,12 @@
 	<!-- Header section -->
 	<header class="header-section">
 		<div class="container">
-			<!-- logo -->
+			<!-- logo MVC AREA-->
 			<a class="site-logo" <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" alt=""></a>
-			
+
 
 			@if (User.Identity.IsAuthenticated)
-			{
+				{
 				<div class="user-panel">
 					<a class="nav-item">
 						<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
@@ -49,23 +49,27 @@
 						</form>
 					</a>
 				</div>
-			}
+				}
 			<!-- responsive -->
 			<div class="nav-switch">
 				<i class="fa fa-bars"></i>
 			</div>
 			<!-- site menu -->
 			<nav class="main-menu">
-				<ul>					
+				<ul>
 					<li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
 					<li><a asp-area="" asp-controller="Home" asp-action="Reviews">Games</a></li>
 					<li><a asp-area="" asp-controller="Home" asp-action="Categories">Blog</a></li>
 					<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+					@if (User.Identity.IsAuthenticated)
+					{
 					<li><a asp-area="Identity" asp-page="/Account/Manage/Index">Hello @User.Identity?.Name</a></li>
-					@*<li><a href="/review.html">Games</a></li>
-					<li><a href="../Views/Home/categories.cshtml">Blog</a></li>
-					<li><a href="~/community.html">Forums</a></li>
-					<li><a href="~/contact.html">Contact</a></li>*@
+					}
+
+						@*<li><a href="/review.html">Games</a></li>
+							<li><a href="../Views/Home/categories.cshtml">Blog</a></li>
+							<li><a href="~/community.html">Forums</a></li>
+							<li><a href="~/contact.html">Contact</a></li>*@
 				</ul>
 			</nav>
 
