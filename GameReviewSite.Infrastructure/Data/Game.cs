@@ -21,8 +21,8 @@ namespace GameReviewSite.Infrastructure.Data
         [StringLength(100)]
         public string Name { get; set; }
 
-        //public string Image { get; set; }
-        //public string video { get; set; }
+        public byte[] Image { get; set; }
+
 
         [Required]
         [Range(0.00, 10.00)]

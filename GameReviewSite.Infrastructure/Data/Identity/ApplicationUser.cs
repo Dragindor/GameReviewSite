@@ -17,6 +17,8 @@ namespace GameReviewSite.Infrastructure.Data.Identity
 
         [StringLength(50)]
         public string? LastName { get; set; }
+        
+        public byte[] ProfilePicture { get; set; }
 
         public ICollection<Review> Reviews { get; set; }
         public ICollection<Comment> Comments { get; set; }
