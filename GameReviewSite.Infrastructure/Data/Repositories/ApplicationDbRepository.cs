@@ -2,9 +2,9 @@
 
 namespace GameReviewSite.Infrastructure.Data.Repositories
 {
-    public class ApplicatioDbRepository : Repository, IApplicatioDbRepository
+    public class ApplicationDbRepository : Repository, IApplicationDbRepository
     {
-        public ApplicatioDbRepository(ApplicationDbContext context)
+        public ApplicationDbRepository(ApplicationDbContext context)
         {
             this.Context = context;
         }

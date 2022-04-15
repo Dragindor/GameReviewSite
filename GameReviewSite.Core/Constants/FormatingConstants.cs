@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameReviewSite.Core.Constants
 {
-    public class FormatingConstant
+    public class FormatingConstants
     {
         public const string NormalDateFormat = "dd.MM.yyyy";
     }

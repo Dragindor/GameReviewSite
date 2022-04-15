@@ -1,16 +1,18 @@
-﻿using GameReviewSite.Infrastructure.Data;
+﻿using GameReviewSite.Core.Contracts;
+using GameReviewSite.Core.Servicec;
+using GameReviewSite.Infrastructure.Data;
 using GameReviewSite.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace GameReviewSite.Extensions
 {
    public static class ServiceCollectionExtension
    {
        public static IServiceCollection AddApplicationServices(this IServiceCollection services)
        {
-           services.AddScoped<IApplicatioDbRepository, ApplicatioDbRepository>();
-           //services.AddScoped<IUserService, UserService>();
+           services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
+           services.AddScoped<IUserService, UserService>();
    
            return services;
        }

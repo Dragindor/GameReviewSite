@@ -1,6 +1,6 @@
 ﻿namespace GameReviewSite.Core.Constants
 {
-    public static class MessageConstant
+    public static class MessageConstants
     {
         public const string ErrorMessage = "ErrorMessage";
         public const string SuccessMessage = "SuccessMessage";
