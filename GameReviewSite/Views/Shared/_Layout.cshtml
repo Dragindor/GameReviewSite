@@ -61,18 +61,18 @@
 					<li><a asp-area="" asp-controller="Home" asp-action="Reviews">Games</a></li>
 					<li><a asp-area="" asp-controller="Home" asp-action="Categories">Blog</a></li>
 					<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+
+					@if(User.IsInRole("Admin"))
+					{
+						<li><a asp-area="Admin" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a></li>
+					}
 					@if (User.Identity.IsAuthenticated)
 					{
 					<li><a asp-area="Identity" asp-page="/Account/Manage/Index">Hello @User.Identity?.Name</a></li>
 					}
-
-						@*<li><a href="/review.html">Games</a></li>
-							<li><a href="../Views/Home/categories.cshtml">Blog</a></li>
-							<li><a href="~/community.html">Forums</a></li>
-							<li><a href="~/contact.html">Contact</a></li>*@
+					
 				</ul>
 			</nav>
-
 		</div>
 	</header>
 	<!-- Header section end -->
