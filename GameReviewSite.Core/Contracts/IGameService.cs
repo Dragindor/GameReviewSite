@@ -10,19 +10,14 @@ using static GameReviewSite.Core.Models.AddGameViewModel;
 namespace GameReviewSite.Core.Contracts
 {
     public interface IGameService
-    {
-        //Task<IEnumerable<UserListViewModel>> GetUsers();
-        //
-        //Task<UserEditViewModel> GetUserForEdit(string id);
-        //
-        //Task<bool> UpdateUser(UserEditViewModel model);
-        //
-        //Task<ApplicationUser> GetUserById(string id);
-        //Task<Game> AddGame(CreateGameViewModel model);
-        Task<List<AllGamesViewModel>> GetAllGames();
-        Task<List<GameReviewsViewModel>> GetReviews(string userId);
-        Task<bool> CreateGame(AddGameViewModel model, string userId);
-        void DeleteGame(string gameid);
-        string AddReviewToGame(string userId, string cardId);
+    {     
+        Task<bool> CreateGame(AddGameViewModel model);
+        Task<bool> CreateTag(string name);
+        Task<bool> DeleteGame(string gameid);
+        Task<bool> AddReviewToGame(string gameId);
+
+        Task<IEnumerable<AllGamesViewModel>> GetGames();
+
+        //Task<AnimeEditViewModel> GetAnimeForEdit(string id);
     }
 }

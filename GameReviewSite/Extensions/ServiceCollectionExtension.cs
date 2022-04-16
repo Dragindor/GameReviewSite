@@ -1,5 +1,5 @@
 ﻿using GameReviewSite.Core.Contracts;
-using GameReviewSite.Core.Servicec;
+using GameReviewSite.Core.Services;
 using GameReviewSite.Infrastructure.Data;
 using GameReviewSite.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
        {
            services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
            services.AddScoped<IUserService, UserService>();
+           services.AddScoped<IGameService, GameService>();
    
            return services;
        }

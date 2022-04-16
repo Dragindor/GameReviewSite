@@ -2,6 +2,7 @@
 using GameReviewSite.Core.Models;
 using GameReviewSite.Infrastructure.Data;
 using GameReviewSite.Infrastructure.Data.Common;
+using GameReviewSite.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameReviewSite.Core.Services
@@ -9,8 +10,8 @@ namespace GameReviewSite.Core.Services
     public class GameService : IGameService
     {
         public readonly ApplicationDbContext data;
-        public readonly IRepository repo;
-        public GameService(ApplicationDbContext _data,IRepository _repo)
+        public readonly IApplicationDbRepository repo;
+        public GameService(ApplicationDbContext _data, IApplicationDbRepository _repo)
         {
             data = _data;
             repo = _repo;
@@ -32,7 +33,7 @@ namespace GameReviewSite.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<bool> CreateGame(AddGameViewModel model, string userId)
+        public async Task<bool> CreateGame(AddGameViewModel model)
         {
             if (await GameAlreadyExist(model.Name))
             {
@@ -54,37 +55,49 @@ namespace GameReviewSite.Core.Services
             };
 
             await data.Games.AddAsync(game);
-
             await data.SaveChangesAsync();
 
             return true;
         }
-        public void DeleteGame(string gameid)
+        public async Task<bool> DeleteGame(string gameid)
+        {
+            var game = data.Games.FirstOrDefault(x=>x.Id==gameid);
+            if (game==null)
+            {
+                return false;
+            }
+            data.Games.Remove(game);
+            await data.SaveChangesAsync();
+            return true;
+        }
+
+        public Task<bool> AddReviewToGame(string gameId)
         {
             throw new NotImplementedException();
         }
 
-        public List<AllGamesViewModel> GetAllGames()
+        public async Task<IEnumerable<AllGamesViewModel>> GetGames()
         {
-            throw new NotImplementedException();
+            return await repo.All<Game>()
+                .Select(x => new AllGamesViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Image = x.Image,
+                    Rating = x.Rating,
+                    Tags = x.Tags
+                })
+                .ToListAsync();
         }
 
-        public List<GameReviewsViewModel> GetReviews(string userId)
+        public async Task<bool> CreateTag(string name)
         {
-            throw new NotImplementedException();
+            var tag=new Tag()
+            { Name = name };
+            await data.Tags.AddAsync(tag);
+            await data.SaveChangesAsync();
+            return true;
         }
-
-        Task<List<AllGamesViewModel>> IGameService.GetAllGames()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<GameReviewsViewModel>> IGameService.GetReviews(string userId)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
-    
+    }    
 }
 

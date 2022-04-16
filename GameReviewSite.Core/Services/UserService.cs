@@ -4,7 +4,7 @@ using GameReviewSite.Infrastructure.Data.Identity;
 using GameReviewSite.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace GameReviewSite.Core.Servicec
+namespace GameReviewSite.Core.Services
 {
     public class UserService : IUserService
     {

@@ -1,4 +1,5 @@
 ﻿using GameReviewSite.Core.Constants;
+using GameReviewSite.Core.Contracts;
 using GameReviewSite.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -8,50 +9,81 @@ namespace GameReviewSite.Controllers
 {
     public class GameController : Controller
     {
+        private readonly IGameService gameService;
         // GET: GameController
-        public ActionResult Index()
+        public GameController(IGameService _gameService)
+        {
+            gameService = _gameService;   
+        }
+        public IActionResult Index()
         {
             return View();
         }
 
         // GET: GameController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> EditGames()
         {
+            var games=await gameService.GetGames();
             return View();
         }
 
         // GET: GameController/Create
-        public ActionResult Create()
+        //[Authorize(Roles = RoleConstants.Roles.Both)]
+        public async Task<IActionResult> AddGame()
         {
             return View();
         }
 
         // POST: GameController/Create
         [HttpPost]
-        [Authorize(Roles = RoleConstants.Roles.Both)]
+        //[Authorize(Roles = RoleConstants.Roles.Both)]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AddGameViewModel model)
+        public async Task<IActionResult> AddGame(AddGameViewModel model)
         {
-            try
+            if (Request.Form.Files.Count > 0)
             {
-                return RedirectToAction(nameof(Index));
+                IFormFile file = Request.Form.Files.FirstOrDefault();
+                using (var dataStream = new MemoryStream())
+                {
+                    await file.CopyToAsync(dataStream);
+                    model.GamePicture = dataStream.ToArray();
+                }
             }
-            catch
+
+
+            if (await gameService.CreateGame(model))
             {
-                return View();
+                ViewData[MessageConstants.SuccessMessage] = "Успешен запис!";
+                return RedirectToAction(nameof(EditGames));
             }
+            else
+            {
+                ViewData[MessageConstants.ErrorMessage] = "Възникна грешка!";
+            }
+
+            return View(model);
+            //try
+            //{
+            //    return RedirectToAction(nameof(Index));
+            //}
+            //catch
+            //{
+            //    return View();
+            //}
         }
 
         // GET: GameController/Edit/5
-        public ActionResult Edit(int id)
+        [Authorize(Roles = RoleConstants.Roles.Both)]
+        public async Task<IActionResult> Edit(int id)
         {
             return View();
         }
 
         // POST: GameController/Edit/5
         [HttpPost]
+        [Authorize(Roles = RoleConstants.Roles.Both)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, IFormCollection collection)
         {
             try
             {
@@ -64,24 +96,28 @@ namespace GameReviewSite.Controllers
         }
 
         // GET: GameController/Delete/5
-        public ActionResult Delete(int id)
+        [Authorize(Roles = RoleConstants.Roles.Both)]
+        public async Task<IActionResult> Delete()
         {
             return View();
         }
 
         // POST: GameController/Delete/5
         [HttpPost]
+        [Authorize(Roles = RoleConstants.Roles.Both)]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(string id)
         {
-            try
+            if (await gameService.DeleteGame(id))
             {
-                return RedirectToAction(nameof(Index));
+                ViewData[MessageConstants.SuccessMessage] = "Успешен запис!";
+                return RedirectToAction(nameof(EditGames));
             }
-            catch
+            else
             {
-                return View();
+                ViewData[MessageConstants.ErrorMessage] = "Възникна грешка!";
             }
+            return View();
         }
     }
 }
