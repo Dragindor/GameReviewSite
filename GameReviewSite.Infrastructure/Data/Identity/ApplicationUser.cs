@@ -6,12 +6,6 @@ namespace GameReviewSite.Infrastructure.Data.Identity
 {
     public class ApplicationUser : IdentityUser
     {
-        public ApplicationUser()
-        {
-            this.Reviews = new HashSet<Review>();
-            this.Comments = new HashSet<Comment>();
-        }
-
         [StringLength(50)]
         public string? FirstName { get; set; }
 
@@ -20,7 +14,7 @@ namespace GameReviewSite.Infrastructure.Data.Identity
         
         public byte[] ProfilePicture { get; set; }
 
-        public ICollection<Review> Reviews { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
+        public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
     }
 }

@@ -128,6 +128,7 @@ namespace GameReviewSite.Areas.Identity.Pages.Account.Manage
 
             var firstName = user.FirstName;
             var lastName = user.LastName;
+            var userName = user.UserName;
             if (Input.FirstName != firstName)
             {
                 user.FirstName = Input.FirstName;
@@ -136,6 +137,11 @@ namespace GameReviewSite.Areas.Identity.Pages.Account.Manage
             if (Input.LastName != lastName)
             {
                 user.LastName = Input.LastName;
+                await _userManager.UpdateAsync(user);
+            }
+            if (Input.Username != userName)
+            {
+                user.UserName = Input.Username;
                 await _userManager.UpdateAsync(user);
             }
 

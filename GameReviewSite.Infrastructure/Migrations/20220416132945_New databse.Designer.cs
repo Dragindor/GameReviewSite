@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GameReviewSite.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220414131856_Profile picture")]
-    partial class Profilepicture
+    [Migration("20220416132945_New databse")]
+    partial class Newdatabse
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -69,10 +69,9 @@ namespace GameReviewSite.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Dlc")
+                    b.Property<byte[]>("Image")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -142,6 +141,11 @@ namespace GameReviewSite.Infrastructure.Migrations
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.HasKey("Id");
 

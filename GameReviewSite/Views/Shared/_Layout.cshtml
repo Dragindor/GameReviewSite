@@ -36,18 +36,18 @@
 	<header class="header-section">
 		<div class="container">
 			<!-- logo MVC AREA-->
-			<a class="site-logo" <a asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" alt=""></a>
+			<a class="site-logo" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/img/logo.png" alt=""></a>
 
 
 			@if (User.Identity.IsAuthenticated)
 				{
 				<div class="user-panel">
-					<a class="nav-item">
+					<div class="nav-item">
 						<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
 							<i class="fas fa-door-open"></i>
 							<button type="submit" class="nav-link btn btn-link text-dark">Log Out</button>
 						</form>
-					</a>
+					</div>
 				</div>
 				}
 			<!-- responsive -->
@@ -98,7 +98,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-widget mb-5 mb-md-0">
-						<h4 class="fw-title">Latest Posts</h4>
+						<h4 class="fw-title">Latest Reviews</h4>
 						<div class="latest-blog">
 							<div class="lb-item">
 								<div class="lb-thumb set-bg" data-setbg="img/latest-blog/1.jpg"></div>
@@ -129,7 +129,7 @@
 				</div>
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-widget">
-						<h4 class="fw-title">Top Comments</h4>
+						<h4 class="fw-title">Latest Comments</h4>
 						<div class="top-comment">
 							<div class="tc-item">
 								<div class="tc-thumb set-bg" data-setbg="img/authors/1.jpg"></div>

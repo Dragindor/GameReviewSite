@@ -73,6 +73,7 @@ namespace GameReviewSite.Areas.Identity.Pages.Account
             public string LastName { get; set; }
 
             [Required]
+            [StringLength(20, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [Display(Name = "UserName")]
             public string UserName { get; set; }
             /// <summary>
@@ -134,7 +135,6 @@ namespace GameReviewSite.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

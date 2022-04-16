@@ -1,5 +1,4 @@
 using GameReviewSite.Core.Constants;
-using GameReviewSite.Extensions;
 using GameReviewSite.Infrastructure.Data;
 using GameReviewSite.Infrastructure.Data.Identity;
 using GameReviewSite.ModelBinders;

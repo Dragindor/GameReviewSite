@@ -6,10 +6,6 @@ namespace GameReviewSite.Infrastructure.Data
 {
     public class Review
     {
-        public Review()
-        {
-            this.Comments= new HashSet<Comment>();
-        }
         [Key]
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
@@ -30,6 +26,6 @@ namespace GameReviewSite.Infrastructure.Data
         [Range(0.00, 10.00)]
         public double Rating { get; set; }
 
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();
     }
 }

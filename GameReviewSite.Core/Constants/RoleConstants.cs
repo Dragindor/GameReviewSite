@@ -7,6 +7,8 @@
             public const string Admin = "Admin";
 
             public const string Editor = "Editor";
+
+            public const string Both = "Admin, Editor";
         }
     }
 }

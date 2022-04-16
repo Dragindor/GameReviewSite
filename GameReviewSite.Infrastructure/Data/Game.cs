@@ -9,11 +9,6 @@ namespace GameReviewSite.Infrastructure.Data
 {
     public class Game
     {
-        public Game()
-        {
-            this.Reviews = new HashSet<Review>();
-            this.Tags = new HashSet<Tag>();
-        }
         [Key]
         public string Id { get; set; } = Guid.NewGuid().ToString();
 
@@ -22,7 +17,6 @@ namespace GameReviewSite.Infrastructure.Data
         public string Name { get; set; }
 
         public byte[] Image { get; set; }
-
 
         [Required]
         [Range(0.00, 10.00)]
@@ -46,19 +40,15 @@ namespace GameReviewSite.Infrastructure.Data
 
         [Required]
         [StringLength(10)]
-        public string ReleaseDate { get; set; }
-        
-        [Required]
-        [StringLength(100)]
-        public string Dlc { get; set; }
+        public string ReleaseDate { get; set; }       
 
         [Required]
         [StringLength(300)]
         public string SystemRequirements { get; set; }
 
-        public ICollection<Tag> Tags { get; set; }
+        public ICollection<Tag> Tags { get; set; } = new HashSet<Tag>();
 
-        public ICollection<Review> Reviews { get; set; }
+        public ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
 
     }
 }

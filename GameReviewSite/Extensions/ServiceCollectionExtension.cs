@@ -5,7 +5,7 @@ using GameReviewSite.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 
-namespace GameReviewSite.Extensions
+namespace Microsoft.Extensions.DependencyInjection
 {
    public static class ServiceCollectionExtension
    {

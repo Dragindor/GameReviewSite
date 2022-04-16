@@ -4,7 +4,8 @@ using GameReviewSite.Core.Constants;
 
 namespace GameReviewSite.Areas.Admin.Controllers
 {
-    [Authorize(Roles = RoleConstants.Roles.Admin)]
+    [Authorize]
+    //[Authorize(Roles = RoleConstants.Roles.Admin)]
     [Area("Admin")]
     public class BaseController : Controller
     {
