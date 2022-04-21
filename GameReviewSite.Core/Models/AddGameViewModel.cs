@@ -18,7 +18,7 @@ namespace GameReviewSite.Core.Models
 
             [Required(ErrorMessage = "{0} is required")]
             [Display(Name = "Game Picture")]
-            public byte[] GamePicture { get; set; }
+            public string GamePicture { get; set; }
 
             [Required(ErrorMessage = "{0} is required")]
             [StringLength(1000)]

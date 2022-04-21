@@ -1,13 +1,14 @@
 ﻿using GameReviewSite.Core.Constants;
 using GameReviewSite.Core.Contracts;
 using GameReviewSite.Core.Models;
+using GameReviewSite.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameReviewSite.Controllers
 {
-    public class GameController : Controller
+    public class GameController : BaseController
     {
         private readonly IGameService gameService;
         // GET: GameController
@@ -24,11 +25,12 @@ namespace GameReviewSite.Controllers
         public async Task<IActionResult> EditGames()
         {
             var games=await gameService.GetGames();
-            return View();
+            return View(games);
         }
 
         // GET: GameController/Create
         //[Authorize(Roles = RoleConstants.Roles.Both)]
+        [HttpGet]
         public async Task<IActionResult> AddGame()
         {
             return View();
@@ -40,16 +42,6 @@ namespace GameReviewSite.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddGame(AddGameViewModel model)
         {
-            if (Request.Form.Files.Count > 0)
-            {
-                IFormFile file = Request.Form.Files.FirstOrDefault();
-                using (var dataStream = new MemoryStream())
-                {
-                    await file.CopyToAsync(dataStream);
-                    model.GamePicture = dataStream.ToArray();
-                }
-            }
-
 
             if (await gameService.CreateGame(model))
             {
@@ -70,7 +62,7 @@ namespace GameReviewSite.Controllers
             //{
             //    return View();
             //}
-        }
+        }       
 
         // GET: GameController/Edit/5
         [Authorize(Roles = RoleConstants.Roles.Both)]

@@ -88,16 +88,7 @@ namespace GameReviewSite.Core.Services
                     Tags = x.Tags
                 })
                 .ToListAsync();
-        }
-
-        public async Task<bool> CreateTag(string name)
-        {
-            var tag=new Tag()
-            { Name = name };
-            await data.Tags.AddAsync(tag);
-            await data.SaveChangesAsync();
-            return true;
-        }
+        }       
     }    
 }
 
