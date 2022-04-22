@@ -1,5 +1,6 @@
 ﻿using GameReviewSite.Core.Constants;
 using GameReviewSite.Core.Contracts;
+using GameReviewSite.Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameReviewSite.Controllers
@@ -57,6 +58,31 @@ namespace GameReviewSite.Controllers
             //{
             //    return View();
             //}
+        }
+
+        public async Task<IActionResult> Edit(string id)
+        {
+            var model = await tagService.GetTagForEdit(id);
+
+            return View(model);
+        }
+
+        // POST: AnimeController/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Tag model)
+        {
+            if (await tagService.UpdateTag(model))
+            {
+                ViewData[MessageConstants.SuccessMessage] = "Успешен запис!";
+                return RedirectToAction(nameof(ManageTags));
+            }
+            else
+            {
+                ViewData[MessageConstants.ErrorMessage] = "Възникна грешка!";
+            }
+
+            return View(model);
         }
     }
 }

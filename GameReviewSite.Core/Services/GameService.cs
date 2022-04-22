@@ -35,6 +35,7 @@ namespace GameReviewSite.Core.Services
 
         public async Task<bool> CreateGame(AddGameViewModel model)
         {
+            var tags = this.data.Tags.ToList();
             if (await GameAlreadyExist(model.Name))
             {
                 return false;

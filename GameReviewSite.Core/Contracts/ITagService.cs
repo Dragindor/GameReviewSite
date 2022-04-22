@@ -6,6 +6,10 @@ namespace GameReviewSite.Core.Contracts
     {
         Task<bool> CreateTag(string name);
 
+        Task<Tag> GetTagForEdit(string id);
+
         Task<IEnumerable<Tag>> GetTags();
+
+        Task<bool> UpdateTag(Tag tag);
     }
 }

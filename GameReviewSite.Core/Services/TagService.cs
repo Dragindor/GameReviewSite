@@ -23,11 +23,45 @@ namespace GameReviewSite.Core.Services
             return true;
         }
 
+        public async Task<Tag> GetTagForEdit(string id)
+        {
+            var tag = await repo.GetByIdAsync<Tag>(id);
+
+            if (tag==null)
+            {
+                throw new ArgumentNullException(nameof(tag));
+            }
+
+            var foundTag = new Tag()
+            {
+                Id = id,
+                Name = tag.Name
+            };
+
+            return foundTag;
+        }
+
         public async Task<IEnumerable<Tag>> GetTags()
         {
             var tags = this.data.Tags.ToList();
 
             return tags;
+        }
+
+        public async Task<bool> UpdateTag(Tag tag)
+        {
+            bool result = false;
+
+            var Tag = await repo.GetByIdAsync<Tag>(tag.Id);
+
+            if (Tag != null)
+            {
+                Tag.Name = tag.Name;
+                await repo.SaveChangesAsync();
+                result = true;
+            }
+
+            return result;
         }
     }
 }
