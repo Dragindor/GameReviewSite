@@ -1,0 +1,54 @@
+﻿@using GameReviewSite.Core.Models
+@using GameReviewSite.Infrastructure.Data
+@model IEnumerable<Tag>
+@{
+}
+
+<div class="row">
+	<div class="col-12">
+		<div class="container">
+			<div>
+				<h3 class="card-title">Application Tags</h3>
+				<div class="card-tools row">
+					<div class="col-lg-8">
+						<div class="input-group input-group-sm" style="width: 20%;">
+							<input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+							<div class="input-group-append">
+								<button type="submit">
+									<i class="fas fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-4">
+						<button type="button" class="nav-link btn btn-primary btn-block text-white">
+							<a asp-area="" asp-controller="Tag" asp-action="AddTag">Create Tag</a>
+						</button>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<table style="margin-top: 10px;">
+					<thead>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var tag in Model)
+						{
+							<tr>
+								<td>@tag.Name</td>
+								<td>
+									<a asp-area="" asp-action="edit" asp-controller="anime" asp-route-id="@tag.Id" class="btn btn-block btn-outline-info btn-xs">Edit</a>
+									@*<a asp-area="" asp-action="delete" asp-controller="anime" asp-route-id="@anime.Id" class="btn btn-block btn-outline-warning btn-xs">Delete</a>*@
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

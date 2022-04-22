@@ -19,7 +19,7 @@ namespace GameReviewSite.Controllers
             return View();
         }
 
-        public async Task<IActionResult> EditTags()
+        public async Task<IActionResult> ManageTags()
         {
             var tags = await tagService.GetTags();
             return View(tags);
@@ -41,7 +41,7 @@ namespace GameReviewSite.Controllers
             if (await tagService.CreateTag(name))
             {
                 ViewData[MessageConstants.SuccessMessage] = "Успешен запис!";
-                return RedirectToAction(nameof(EditTags));
+                return RedirectToAction(nameof(ManageTags));
             }
             else
             {

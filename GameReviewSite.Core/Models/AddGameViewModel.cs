@@ -34,7 +34,7 @@ namespace GameReviewSite.Core.Models
 
             [Required(ErrorMessage = "{0} is required")]
             [StringLength(100)]
-            public string publisher { get; set; }
+            public string Publisher { get; set; }
 
             [Required(ErrorMessage = "{0} is required")]
             [StringLength(10)]

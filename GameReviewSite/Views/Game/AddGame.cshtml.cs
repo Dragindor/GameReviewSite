@@ -88,7 +88,7 @@ namespace GameReviewSite.Views.Game
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [Display(Name = "publisher")]
-            public string publisher { get; set; }
+            public string Publisher { get; set; }
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -125,7 +125,7 @@ namespace GameReviewSite.Views.Game
                     Price=Input.Price,
                     Description = Input.Description,
                     Developer = Input.Developer,
-                    publisher = Input.publisher,
+                    Publisher = Input.Publisher,
                     ReleaseDate = Input.ReleaseDate,
                     SystemRequirements = Input.SystemRequirements,
                     Tags = Input.Tags

@@ -33,7 +33,7 @@ namespace GameReviewSite.Infrastructure.Data
 
         [Required]
         [StringLength(100)]
-        public string publisher { get; set; }
+        public string Publisher { get; set; }
 
         [Required]
         [StringLength(10)]

@@ -1,0 +1,61 @@
+﻿@using GameReviewSite.Core.Models
+@model IEnumerable<AllGamesViewModel>
+@{
+}
+
+<div class="row">
+	<div class="col-12">
+		<div class="">
+			<div class="card-header">
+				<h3 class="card-title">Application Games</h3>
+				<div class="card-tools">
+					<div class="input-group input-group-sm" style="width: 20%;">
+						<input type="text" name="table_search" class="form-control float-right"  placeholder="Search">
+						<div class="input-group-append">
+							<button type="submit" class="text-white btn btn-default">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="card-body table-responsive p-0">
+				<table class="text-white table text-nowrap">
+					<thead>
+						<tr>
+							<th>Image</th>
+							<th>Name</th>
+							<th>Price</th>
+							<th>Developer</th>
+							<th>Publisher</th>
+							<th>ReleaseDate</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var game in Model)
+						{
+							<tr>
+								<td>
+									@if (@game.Image != null)
+									{
+										<img style="width: 50px; height: 50px;" src="@game.Image">
+									}
+								</td>
+								<td>@game.Name</td>
+								<td>@game.Price</td>
+								<td>@game.Developer</td>
+								<td>@game.Publisher</td>
+								<td>@game.ReleaseDate</td>
+								<td>
+									<a asp-area="" asp-action="edit" asp-controller="anime" asp-route-id="@game.Id" class="btn btn-block btn-outline-info btn-xs">Edit</a>
+									@*<a asp-area="" asp-action="delete" asp-controller="anime" asp-route-id="@anime.Id" class="btn btn-block btn-outline-warning btn-xs">Delete</a>*@
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

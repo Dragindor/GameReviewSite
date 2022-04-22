@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GameReviewSite.Core.Models
 {
-    public class GameReviewsViewModel
+    public class GameDetailsViewModel
     {
     }
 }

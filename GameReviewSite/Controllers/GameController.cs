@@ -22,11 +22,6 @@ namespace GameReviewSite.Controllers
         }
 
         // GET: GameController/Details/5
-        public async Task<IActionResult> EditGames()
-        {
-            var games=await gameService.GetGames();
-            return View(games);
-        }
 
         // GET: GameController/Create
         //[Authorize(Roles = RoleConstants.Roles.Both)]
@@ -46,7 +41,8 @@ namespace GameReviewSite.Controllers
             if (await gameService.CreateGame(model))
             {
                 ViewData[MessageConstants.SuccessMessage] = "Успешен запис!";
-                return RedirectToAction(nameof(EditGames));
+                return RedirectToAction(nameof(ManageGames));
+
             }
             else
             {
@@ -103,13 +99,20 @@ namespace GameReviewSite.Controllers
             if (await gameService.DeleteGame(id))
             {
                 ViewData[MessageConstants.SuccessMessage] = "Успешен запис!";
-                return RedirectToAction(nameof(EditGames));
+                return RedirectToAction(nameof(ManageGames));
             }
             else
             {
                 ViewData[MessageConstants.ErrorMessage] = "Възникна грешка!";
             }
             return View();
+        }
+
+        public async Task<IActionResult> ManageGames()
+        {
+            var games = await gameService.GetGames();
+
+            return View(games);
         }
     }
 }

@@ -10,18 +10,24 @@ namespace GameReviewSite.Core.Models
 {
     public class AllGamesViewModel
     {
-        [Key]
         public string Id { get; set; } 
 
-        [Required]
-        [StringLength(100)]
         public string Name { get; set; }
 
         public string Image { get; set; }
 
-        [Required]
-        [Range(0.00, 10.00)]
         public double Rating { get; set; }
-        public ICollection<Tag> Tags { get; set; }
+
+        public double Price { get; set; }
+
+        public string Description { get; set; }
+
+        public string Developer { get; set; }
+
+        public string Publisher { get; set; }
+
+        public string ReleaseDate { get; set; }
+
+        public string SystemRequirements { get; set; }
     }
 }

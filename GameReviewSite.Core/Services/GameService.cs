@@ -48,7 +48,7 @@ namespace GameReviewSite.Core.Services
                 Price=model.Price,
                 Description=model.Description,
                 Developer=model.Developer,
-                publisher=model.publisher,
+                Publisher=model.Publisher,
                 ReleaseDate=model.ReleaseDate,
                 SystemRequirements=model.SystemRequirements,
                 Tags=model.Tags
@@ -85,7 +85,12 @@ namespace GameReviewSite.Core.Services
                     Name = x.Name,
                     Image = x.Image,
                     Rating = x.Rating,
-                    Tags = x.Tags
+                    Price = x.Price,
+                    Description = x.Description,
+                    Developer = x.Developer,
+                    Publisher=x.Publisher,
+                    ReleaseDate=x.ReleaseDate,
+                    SystemRequirements=x.SystemRequirements
                 })
                 .ToListAsync();
         }       
