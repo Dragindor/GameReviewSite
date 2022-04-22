@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>Game Warrior Template</title>
+	<title>Game Warrior</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="Game Warrior Template">
 	<meta name="keywords" content="warrior, game, creative, html">
@@ -24,6 +24,88 @@
 	  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
+	<!--<style>
+
+		.header__menu {
+			text-align: center;
+		}
+
+			.header__menu ul li {
+				list-style: none;
+				display: inline-block;
+				position: relative;
+				margin-right: 16px;
+			}
+
+				.header__menu ul li.active a {
+					background: #e53637;
+					color: #ffffff;
+				}
+
+				.header__menu ul li:hover a {
+					color: #ffffff;
+				}
+
+				.header__menu ul li:hover .dropdown {
+					top: 62px;
+					opacity: 1;
+					visibility: visible;
+				}
+
+					.header__menu ul li:hover .dropdown li a {
+						background: transparent;
+					}
+
+				.header__menu ul li:last-child {
+					margin-right: 0;
+				}
+
+				.header__menu ul li .dropdown {
+					position: absolute;
+					left: 0;
+					top: 82px;
+					width: 150px;
+					background: #ffffff;
+					text-align: left;
+					padding: 5px 0;
+					z-index: 9;
+					opacity: 0;
+					visibility: hidden;
+					-webkit-transition: all, 0.3s;
+					-o-transition: all, 0.3s;
+					transition: all, 0.3s;
+				}
+
+					.header__menu ul li .dropdown li {
+						display: block;
+						margin-right: 0;
+					}
+
+						.header__menu ul li .dropdown li a {
+							font-size: 14px;
+							color: #111111;
+							font-weight: 500;
+							padding: 5px 20px;
+						}
+
+				.header__menu ul li a {
+					font-size: 15px;
+					color: #b7b7b7;
+					display: block;
+					font-weight: 700;
+					-webkit-transition: all, 0.5s;
+					-o-transition: all, 0.5s;
+					transition: all, 0.5s;
+					padding: 20px;
+				}
+
+					.header__menu ul li a span {
+						position: relative;
+						font-size: 17px;
+						top: 2px;
+					}
+	</style>-->
+
 	@await RenderSectionAsync("Head", false)
 </head>
 <body>
@@ -40,7 +122,7 @@
 
 
 			@if (User.Identity.IsAuthenticated)
-				{
+			{
 				<div class="user-panel">
 					<div class="nav-item">
 						<form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/", new { area = "" })" method="post">
@@ -49,7 +131,7 @@
 						</form>
 					</div>
 				</div>
-				}
+			}
 			<!-- responsive -->
 			<div class="nav-switch">
 				<i class="fa fa-bars"></i>
@@ -62,15 +144,39 @@
 					<li><a asp-area="" asp-controller="Home" asp-action="Categories">Blog</a></li>
 					<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
 
-					@if(User.IsInRole("Admin"))
-					{
-						<li><a asp-area="Admin" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a></li>
-					}
-					@if (User.Identity.IsAuthenticated)
-					{
-					<li><a asp-area="Identity" asp-page="/Account/Manage/Index">Hello @User.Identity?.Name</a></li>
-					}
-					
+					<li>
+						@if (User.IsInRole("Admin"))
+						{
+						/*<a href="#">Management <span class="arrow_carrot-down"></span></a>
+							<ul class="dropdown">
+							<li>
+							@if (User.IsInRole("Admin"))
+							{
+							<a asp-area="Admin" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a>
+							}
+							</li>
+							<li>
+							<a asp-area="" asp-controller="Game" asp-action="ManageGames">Manage Games</a>
+							</li>
+							<li>
+							<a asp-area="" asp-controller="Tag" asp-action="ManageTags">Manage Tags</a>
+							</li>
+							</ul>*/
+
+							/*<a href="#">Management <span class="arrow_carrot-down"></span></a>
+							<div class="dropdown-menu">*/
+								<a asp-area="Admin" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a>
+								<a asp-area="" asp-controller="Game" asp-action="ManageGames">Manage Games</a>
+								<a asp-area="" asp-controller="Tag" asp-action="ManageTags">Manage Tags</a>
+							
+						}
+					</li>
+					<li>
+						@if (User.Identity.IsAuthenticated)
+						{
+							<a asp-area="Identity" asp-page="/Account/Manage/Index">Hello @User.Identity?.Name</a>
+						}
+					</li>
 				</ul>
 			</nav>
 		</div>
