@@ -1,7 +1,6 @@
 ﻿using GameReviewSite.Core.Contracts;
 using GameReviewSite.Core.Models;
 using GameReviewSite.Infrastructure.Data;
-using GameReviewSite.Infrastructure.Data.Common;
 using GameReviewSite.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
@@ -40,21 +39,17 @@ namespace GameReviewSite.Core.Services
             {
                 return false;
             }           
-
             var game = new Game
             {
                 Name = model.Name,
-                Image = model.GamePicture,
+                Image = model.Image,
                 Rating = 0,
                 Price=model.Price,
                 Description=model.Description,
                 Developer=model.Developer,
                 Publisher=model.Publisher,
                 ReleaseDate=model.ReleaseDate,
-                SystemRequirements=model.SystemRequirements,
-                Tags=model.Tags
             };
-
             await data.Games.AddAsync(game);
             await data.SaveChangesAsync();
 
@@ -91,10 +86,69 @@ namespace GameReviewSite.Core.Services
                     Developer = x.Developer,
                     Publisher=x.Publisher,
                     ReleaseDate=x.ReleaseDate,
-                    SystemRequirements=x.SystemRequirements
                 })
                 .ToListAsync();
-        }       
+        }
+
+        public async Task<AddGameViewModel> GetGameForEdit(string id)
+        {
+            var game = await repo.GetByIdAsync<Game>(id);
+
+            if (game == null)
+            {
+                throw new ArgumentNullException(nameof(game));
+            }
+
+            var foundGame = new AddGameViewModel()
+            {
+                Id = game.Id,
+                Name = game.Name,
+                Image = game.Image,
+                Price = game.Price,
+                Description = game.Description,
+                Developer = game.Developer,
+                Publisher = game.Publisher,
+                ReleaseDate = game.ReleaseDate,
+            };
+
+            return foundGame;
+        }
+        public async Task<bool> UpdateGame(AddGameViewModel model)
+        {
+            bool result = false;
+
+            var game = await repo.GetByIdAsync<Game>(model.Id);
+
+            if (game != null)
+            {
+                game.Name = model.Name;
+                game.Image = model.Image;
+                game.ReleaseDate = model.ReleaseDate;
+                game.Price = model.Price;
+                game.Developer = model.Developer;
+                game.Publisher = model.Publisher;
+                game.Description = model.Description;
+
+                await repo.SaveChangesAsync();
+                result = true;
+            }
+            return result;
+        }
+
+        public async Task<bool> HasTag(AddGameViewModel game, string TagName)
+        {
+            var tag = data.Tags.Where(x=>x.Name==TagName).FirstOrDefault();
+
+            if (game.Tags==null)
+            {
+                return false;
+            }
+            if (game.Tags.Contains(tag))
+            {
+                return true;
+            }
+            return false;
+        }
     }    
 }
 

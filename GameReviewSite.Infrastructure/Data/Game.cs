@@ -39,9 +39,6 @@ namespace GameReviewSite.Infrastructure.Data
         [StringLength(10)]
         public string ReleaseDate { get; set; }       
 
-        [Required]
-        [StringLength(300)]
-        public string SystemRequirements { get; set; }
 
         public ICollection<Tag> Tags { get; set; } = new HashSet<Tag>();
 

@@ -5,17 +5,9 @@
 using GameReviewSite.Core.Contracts;
 using GameReviewSite.Core.Models;
 using GameReviewSite.Infrastructure.Data;
-using GameReviewSite.Infrastructure.Data.Identity;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
 using System.ComponentModel.DataAnnotations;
-using System.Net.Mail;
-using System.Text;
-using System.Text.Encodings.Web;
 
 namespace GameReviewSite.Views.Game
 {
@@ -60,8 +52,8 @@ namespace GameReviewSite.Views.Game
             public string Name { get; set; }
 
             [Required]
-            [Display(Name = "GamePicture")]
-            public string GamePicture { get; set; }
+            [Display(Name = "Image")]
+            public string Image { get; set; }
 
             [Required]
             [StringLength(1000, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -99,9 +91,7 @@ namespace GameReviewSite.Views.Game
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
-            [Display(Name = "SystemRequirements")]            
-            public string SystemRequirements { get; set; }
+
 
             [Display(Name = "Tags")]
             public ICollection<Tag> Tags { get; set; }
@@ -121,13 +111,12 @@ namespace GameReviewSite.Views.Game
                 var Game = new AddGameViewModel
                 {
                     Name=Input.Name,
-                    GamePicture=Input.GamePicture,
+                    Image = Input.Image,
                     Price=Input.Price,
                     Description = Input.Description,
                     Developer = Input.Developer,
                     Publisher = Input.Publisher,
                     ReleaseDate = Input.ReleaseDate,
-                    SystemRequirements = Input.SystemRequirements,
                     Tags = Input.Tags
                     
                 };

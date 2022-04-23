@@ -28,6 +28,5 @@ namespace GameReviewSite.Core.Models
 
         public string ReleaseDate { get; set; }
 
-        public string SystemRequirements { get; set; }
     }
 }

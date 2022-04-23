@@ -2,26 +2,21 @@
 @model IEnumerable<AllGamesViewModel>
 @{
 }
-
-<div class="row">
+<div>
 	<div class="col-12">
-		<div class="">
-			<div class="card-header">
+		<div>
+			<div>
 				<h3 class="card-title">Application Games</h3>
-				<div class="card-tools">
-					<div class="input-group input-group-sm" style="width: 20%;">
-						<input type="text" name="table_search" class="form-control float-right"  placeholder="Search">
-						<div class="input-group-append">
-							<button type="submit" class="text-white btn btn-default">
-								<i class="fas fa-search"></i>
-							</button>
-						</div>
+				<div class="card-tools row">
+					<div class="col-lg-2">
+						<button type="button" class="nav-link btn btn-primary btn-block text-white">
+							<a asp-area="" asp-controller="Game" asp-action="Addgame">Add Game</a>
+						</button>
 					</div>
 				</div>
 			</div>
-
 			<div class="card-body table-responsive p-0">
-				<table class="text-white table text-nowrap">
+				<table class="table text-nowrap">
 					<thead>
 						<tr>
 							<th>Image</th>
@@ -48,8 +43,8 @@
 								<td>@game.Publisher</td>
 								<td>@game.ReleaseDate</td>
 								<td>
-									<a asp-area="" asp-action="edit" asp-controller="anime" asp-route-id="@game.Id" class="btn btn-block btn-outline-info btn-xs">Edit</a>
-									@*<a asp-area="" asp-action="delete" asp-controller="anime" asp-route-id="@anime.Id" class="btn btn-block btn-outline-warning btn-xs">Delete</a>*@
+									<a asp-area="" asp-action="edit" asp-controller="game" asp-route-id="@game.Id" class="btn btn-block btn-outline-info btn-xs">Edit</a>
+									<a asp-area="" asp-action="EditGameTags" asp-controller="game" asp-route-id="@game.Id" class="btn btn-block btn-outline-warning btn-xs">Manage Tags</a>
 								</td>
 							</tr>
 						}

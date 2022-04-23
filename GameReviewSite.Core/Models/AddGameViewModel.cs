@@ -1,10 +1,5 @@
 ﻿using GameReviewSite.Infrastructure.Data;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GameReviewSite.Core.Models
 {
@@ -18,7 +13,7 @@ namespace GameReviewSite.Core.Models
 
             [Required(ErrorMessage = "{0} is required")]
             [Display(Name = "Game Picture")]
-            public string GamePicture { get; set; }
+            public string Image { get; set; }
 
             [Required(ErrorMessage = "{0} is required")]
             [StringLength(1000)]
@@ -39,12 +34,7 @@ namespace GameReviewSite.Core.Models
             [Required(ErrorMessage = "{0} is required")]
             [StringLength(10)]
             public string ReleaseDate { get; set; }           
-
-            [Required(ErrorMessage = "{0} is required")]
-            [StringLength(300)]
-            public string SystemRequirements { get; set; }
-
-            [Required(ErrorMessage = "{0} is required")]
+        
             public ICollection<Tag> Tags { get; set; }
         
     }

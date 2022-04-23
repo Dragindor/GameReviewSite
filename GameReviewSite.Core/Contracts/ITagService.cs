@@ -1,4 +1,5 @@
-﻿using GameReviewSite.Infrastructure.Data;
+﻿using GameReviewSite.Core.Models;
+using GameReviewSite.Infrastructure.Data;
 
 namespace GameReviewSite.Core.Contracts
 {
@@ -11,5 +12,7 @@ namespace GameReviewSite.Core.Contracts
         Task<IEnumerable<Tag>> GetTags();
 
         Task<bool> UpdateTag(Tag tag);
+        Task<bool> RemoveFromTagsAsync(AddGameViewModel game, List<Tag> tags);
+        Task<bool> AddToTagsAsync(AddGameViewModel game, List<AddTagToGame> model);
     }
 }
