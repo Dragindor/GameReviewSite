@@ -39,14 +39,9 @@ namespace GameReviewSite.Controllers
         public IActionResult Index()
         {
             return View();
-        }
+        }      
 
         public IActionResult Reviews()
-        {
-            return View();
-        }
-
-        public IActionResult Categories()
         {
             return View();
         }

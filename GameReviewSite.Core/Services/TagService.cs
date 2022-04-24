@@ -47,7 +47,6 @@ namespace GameReviewSite.Core.Services
                     }
                     
                 }
-                //gamechanged.Tags=game.Tags;
                 return true;
             }
             catch (Exception)

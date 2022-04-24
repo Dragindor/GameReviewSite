@@ -11,23 +11,25 @@ namespace GameReviewSite.Controllers
     {
         private readonly IGameService gameService;
         private readonly ITagService tagService;
-        // GET: GameController
 
         public GameController(IGameService gameService, ITagService tagService)
         {
             this.gameService = gameService;
             this.tagService = tagService;
         }
-
-        public IActionResult Index()
+        public async Task<IActionResult> AllGames()
         {
-            return View();
+            var games = await gameService.GetGames();
+            return View(games);
         }
 
-        // GET: GameController/Details/5
+        public async Task<IActionResult> gameDetails(string id)
+        {
+            var game = await gameService.GetGameById(id);
 
-        // GET: GameController/Create
-        //[Authorize(Roles = RoleConstants.Roles.Both)]
+            return View(game);
+        }
+
         [HttpGet]
         public async Task<IActionResult> AddGame()
         {
@@ -35,9 +37,7 @@ namespace GameReviewSite.Controllers
             return View();
         }
 
-        // POST: GameController/Create
         [HttpPost]
-        //[Authorize(Roles = RoleConstants.Roles.Both)]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddGame(AddGameViewModel model)
         {
@@ -53,18 +53,9 @@ namespace GameReviewSite.Controllers
                 ViewData[MessageConstants.ErrorMessage] = "Възникна грешка!";
             }
 
-            return View(model);
-            //try
-            //{
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
+            return View(model);   
         }
 
-        // GET: GameController/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             var model = await gameService.GetGameForEdit(id);
@@ -88,12 +79,10 @@ namespace GameReviewSite.Controllers
             }
 
             return View(model);
-        }
-
-        // GET: GameController/Delete/5        
+        }    
         public async Task<IActionResult> ManageGames()
         {
-            var games = await gameService.GetGames();
+            var games = await gameService.GetGamesToManage();
 
             return View(games);
         }

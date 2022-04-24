@@ -10,7 +10,9 @@ namespace GameReviewSite.Core.Contracts
         Task<bool> AddReviewToGame(string gameId);
         Task<bool> HasTag(Game game, string TagName);
         Task<IEnumerable<AllGamesViewModel>> GetGames();
+        Task<IEnumerable<ManageGamesViewModel>> GetGamesToManage();
         Task<bool> UpdateGame(AddGameViewModel model);        
         Task<Game> GetGameForEdit(string id);
+        Task<Game> GetGameById(string id);
     }
 }

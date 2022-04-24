@@ -82,10 +82,26 @@ namespace GameReviewSite.Core.Services
                     Image = x.Image,
                     Rating = x.Rating,
                     Price = x.Price,
-                    Description = x.Description,
                     Developer = x.Developer,
                     Publisher=x.Publisher,
                     ReleaseDate=x.ReleaseDate,
+                    Tag=x.Tags.Select(x=>x.Name).FirstOrDefault(),
+                    ReviewsCount=x.Reviews.Count()
+                })
+                .ToListAsync();
+        }
+        public async Task<IEnumerable<ManageGamesViewModel>> GetGamesToManage()
+        {
+            return await repo.All<Game>()
+                .Select(x => new ManageGamesViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Image = x.Image,
+                    Price = x.Price,
+                    Developer = x.Developer,
+                    Publisher = x.Publisher,
+                    ReleaseDate = x.ReleaseDate
                 })
                 .ToListAsync();
         }
@@ -150,6 +166,16 @@ namespace GameReviewSite.Core.Services
                 return true;
             }
             return false;
+        }
+
+        public async Task<Game> GetGameById(string id)
+        {
+            var game = await data.Games.Where(x => x.Id == id)
+                .Include(x => x.Tags)
+                .FirstOrDefaultAsync();
+
+            return game;
+
         }
     }    
 }

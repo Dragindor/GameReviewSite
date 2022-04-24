@@ -1,0 +1,131 @@
+﻿@using GameReviewSite.Infrastructure.Data
+@model Game
+@{
+	ViewData["Title"] = "Game Details";
+}
+<!-- Game Section Begin -->
+<section class="">
+	<div class="">
+
+		<div class="rgi-thumb set-bg" data-setbg="@Model.Image" style="width:100%; height:1000px;"></div>
+
+		<div class="col-lg-9">
+			<div class="container">
+				<div class="">
+					<h3>@Model.Name</h3>
+				</div>
+				<div class="">
+					<div class="rating">
+						<a href="#"><i class="fa fa-star"></i></a>
+						<a href="#"><i class="fa fa-star"></i></a>
+						<a href="#"><i class="fa fa-star"></i></a>
+						<a href="#"><i class="fa fa-star"></i></a>
+						<a href="#"><i class="fa fa-star-half-o"></i></a>
+					</div>
+					<span>@Model.Reviews.Count Votes</span>
+				</div>
+				<p>
+					@Model.Description
+				</p>
+				<div class="">
+					<div class="row">
+						<div class="col-lg-6 col-md-6">
+							<ul>
+								<li><span>Developer:</span> @Model.Developer</li>
+								<li><span>Publisher:</span> @Model.Publisher</li>
+								<li><span>ReleaseDate:<span> @Model.ReleaseDate</li>
+								<li><span>Price:</span> @Model.Price€</li>
+							</ul>
+						</div>
+						<div class="col-lg-6 col-md-6">
+							<ul>
+								<li><span>Tags:</span> Action, Adventure, Fantasy, Magic</li>
+								<li><span>Rating:</span> @Model.Rating</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="rgi-content">
+			<div class="col-lg-8 col-md-8 rgi-content">
+				<div class="">
+					<div class="section-title">
+						<h5>Your Comment</h5>
+					</div>
+					<form action="#">
+						<textarea placeholder="Your Comment"></textarea>
+						<button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+					</form>
+				</div>
+				<br />
+				<div class="anime__details__review">
+					<div class="section-title">
+						<h5>Reviews</h5>
+					</div>
+					<div class="anime__review__item">
+						<div class="anime__review__item__pic">
+							<img src="~/img/anime/review-1.jpg" alt="">
+						</div>
+						<div class="anime__review__item__text">
+							<h6>Chris Curry - <span>1 Hour ago</span></h6>
+							<p>
+								whachikan Just noticed that someone categorized this as belonging to the genre
+								"demons" LMAO
+							</p>
+						</div>
+					</div>
+					<div class="anime__review__item">
+						<div class="anime__review__item__pic">
+							<img src="~/img/anime/review-2.jpg" alt="">
+						</div>
+						<div class="anime__review__item__text">
+							<h6>Lewis Mann - <span>5 Hour ago</span></h6>
+							<p>Finally it came out ages ago</p>
+						</div>
+					</div>
+					<div class="anime__review__item">
+						<div class="anime__review__item__pic">
+							<img src="~/img/anime/review-3.jpg" alt="">
+						</div>
+						<div class="anime__review__item__text">
+							<h6>Louis Tyler - <span>20 Hour ago</span></h6>
+							<p>Where is the episode 15 ? Slow update! Tch</p>
+						</div>
+					</div>
+					<div class="anime__review__item">
+						<div class="anime__review__item__pic">
+							<img src="~/img/anime/review-4.jpg" alt="">
+						</div>
+						<div class="anime__review__item__text">
+							<h6>Chris Curry - <span>1 Hour ago</span></h6>
+							<p>
+								whachikan Just noticed that someone categorized this as belonging to the genre
+								"demons" LOL
+							</p>
+						</div>
+					</div>
+					<div class="anime__review__item">
+						<div class="anime__review__item__pic">
+							<img src="~/img/anime/review-5.jpg" alt="">
+						</div>
+						<div class="anime__review__item__text">
+							<h6>Lewis Mann - <span>5 Hour ago</span></h6>
+							<p>Finally it came out ages ago</p>
+						</div>
+					</div>
+					<div class="anime__review__item">
+						<div class="anime__review__item__pic">
+							<img src="~/img/anime/review-6.jpg" alt="">
+						</div>
+						<div class="anime__review__item__text">
+							<h6>Louis Tyler - <span>20 Hour ago</span></h6>
+							<p>Where is the episode 15 ? Slow update! Tch</p>
+						</div>
+					</div>
+				</div>
+			</div>			
+		</div>
+	</div>
+</section>
+<!-- Anime Section End -->
