@@ -14,7 +14,14 @@ namespace GameReviewSite.Infrastructure.Data
         public string UserId { get; set; }
 
         public ApplicationUser User { get; set; }
-        
+
+        [Required]
+        [ForeignKey(nameof(Game))]
+        public string GameId { get; set; }
+
+        public Game Game { get; set; }
+
+
         [Required]
         public string Date { get; set; }
 

@@ -16,6 +16,12 @@ namespace GameReviewSite.Infrastructure.Data
         public ApplicationUser User { get; set; }
 
         [Required]
+        [ForeignKey(nameof(Review))]
+        public string ReviewId { get; set; }
+
+        public Review Review { get; set; }
+
+        [Required]
         public string Date { get; set; }
 
         [Required]

@@ -14,7 +14,34 @@ namespace GameReviewSite.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            base.OnModelCreating(modelBuilder);            
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<GameTag>()
+                .HasKey(x=>new {x.TagId,x.GameId});
+
+            modelBuilder.Entity<Review>()
+                .HasOne(r => r.Game)
+                .WithMany(r => r.Reviews)
+                .HasForeignKey(r => r.GameId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Review>()
+                .HasOne(u => u.User)
+                .WithMany(r => r.Reviews)
+                .HasForeignKey(r => r.UserId);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(u => u.User)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(c => c.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Comment>()
+                .HasOne(c => c.Review)
+                .WithMany(c => c.Comments)
+                .HasForeignKey(c => c.ReviewId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             modelBuilder.Entity<IdentityUser>(entity =>
             {
                 entity.ToTable(name: "User");
@@ -46,6 +73,7 @@ namespace GameReviewSite.Infrastructure.Data
         }
 
         public DbSet<Game> Games { get; set; }
+        public DbSet<GameTag> GameTags { get; set; }
 
         public DbSet<Comment> Comments { get; set; }
 

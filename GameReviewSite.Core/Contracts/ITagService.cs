@@ -12,7 +12,7 @@ namespace GameReviewSite.Core.Contracts
         Task<IEnumerable<Tag>> GetTags();
 
         Task<bool> UpdateTag(Tag tag);
-        Task<bool> RemoveFromTagsAsync(AddGameViewModel game, List<Tag> tags);
-        Task<bool> AddToTagsAsync(AddGameViewModel game, List<AddTagToGame> model);
+        Task<bool> RemoveFromTagsAsync(Game game, List<Tag> tags);
+        Task<bool> AddToTagsAsync(Game game, List<AddTagToGame> model);
     }
 }

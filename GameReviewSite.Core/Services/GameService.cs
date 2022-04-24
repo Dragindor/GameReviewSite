@@ -90,16 +90,17 @@ namespace GameReviewSite.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<AddGameViewModel> GetGameForEdit(string id)
+        public async Task<Game> GetGameForEdit(string id)
         {
-            var game = await repo.GetByIdAsync<Game>(id);
-
+            var game = data.Games.Where(x => x.Id == id)
+                .Include(x => x.Tags)
+                .FirstOrDefault();
             if (game == null)
             {
                 throw new ArgumentNullException(nameof(game));
             }
 
-            var foundGame = new AddGameViewModel()
+            var foundGame = new Game()
             {
                 Id = game.Id,
                 Name = game.Name,
@@ -109,6 +110,7 @@ namespace GameReviewSite.Core.Services
                 Developer = game.Developer,
                 Publisher = game.Publisher,
                 ReleaseDate = game.ReleaseDate,
+                Tags=game.Tags
             };
 
             return foundGame;
@@ -128,14 +130,14 @@ namespace GameReviewSite.Core.Services
                 game.Developer = model.Developer;
                 game.Publisher = model.Publisher;
                 game.Description = model.Description;
-
+                
                 await repo.SaveChangesAsync();
                 result = true;
             }
             return result;
         }
 
-        public async Task<bool> HasTag(AddGameViewModel game, string TagName)
+        public async Task<bool> HasTag(Game game, string TagName)
         {
             var tag = data.Tags.Where(x=>x.Name==TagName).FirstOrDefault();
 

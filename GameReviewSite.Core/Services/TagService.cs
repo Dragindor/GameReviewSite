@@ -2,6 +2,7 @@
 using GameReviewSite.Core.Models;
 using GameReviewSite.Infrastructure.Data;
 using GameReviewSite.Infrastructure.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameReviewSite.Core.Services
 {
@@ -15,38 +16,38 @@ namespace GameReviewSite.Core.Services
             repo = _repo;
         }
 
-        public async Task<bool> RemoveFromTagsAsync(AddGameViewModel game, List<Tag> tags)
+        public async Task<bool> RemoveFromTagsAsync(Game game, List<Tag> tags)
         {
-            game.Tags = null;
-            if (game.Tags == null)
+             var gamechanged = data.Games.Where(x => x.Id == game.Id)
+                .Include(x => x.Tags)
+                .FirstOrDefault();
+            gamechanged.Tags = new List<Tag>();
+            await repo.SaveChangesAsync();
+            if (gamechanged.Tags.Count==0)
             {
                 return true;
             }
             else return false;
         }
 
-        public async Task<bool> AddToTagsAsync(AddGameViewModel game, List<AddTagToGame> model)
-        {
-            game.Tags = new List<Tag>();
+        public async Task<bool> AddToTagsAsync(Game game, List<AddTagToGame> model)
+        {              
             try
             {
+                var gameTags = data.Games.Where(x => x.Id == game.Id)
+                .Include(x => x.Tags)
+                .FirstOrDefault();
                 foreach (var tag in model)
                 {
                     if (tag.Selected)
                     {
-                        game.Tags.Add(new Tag { Id = tag.Id, Name = tag.Name });
+                        Tag tagFound = data.Tags.FirstOrDefault(t => t.Id == tag.Id);
+                        gameTags.Tags.Add(tagFound);
+                        await repo.SaveChangesAsync();
                     }
                     
                 }
-                var gameTag = await repo.GetByIdAsync<Game>(game.Id);
-
-                if (gameTag != null)
-                {
-                    gameTag.Tags = game.Tags;                  
-
-                    await repo.SaveChangesAsync();
-                }
-                await data.SaveChangesAsync();
+                //gamechanged.Tags=game.Tags;
                 return true;
             }
             catch (Exception)
