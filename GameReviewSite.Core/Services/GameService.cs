@@ -8,15 +8,15 @@ namespace GameReviewSite.Core.Services
 {
     public class GameService : IGameService
     {
-        public readonly ApplicationDbContext data;
-        public readonly IApplicationDbRepository repo;
+        private readonly ApplicationDbContext data;
+        private readonly IApplicationDbRepository repo;
         public GameService(ApplicationDbContext _data, IApplicationDbRepository _repo)
         {
             data = _data;
             repo = _repo;
         }
 
-        private async Task<bool> GameAlreadyExist(string name)
+        public async Task<bool> GameAlreadyExist(string name)
         {
             var game= await data.Games.FirstOrDefaultAsync(x=>x.Name==name);
 
