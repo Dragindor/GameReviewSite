@@ -2,7 +2,6 @@
 using GameReviewSite.Core.Contracts;
 using GameReviewSite.Core.Models;
 using GameReviewSite.Infrastructure.Data;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GameReviewSite.Controllers
