@@ -12,6 +12,6 @@ namespace GameReviewSite.Core.Contracts
     {
         Task<bool> AddForumMessage(ForumMessage model, string userId);
 
-        Task<IEnumerable<ForumMessageViewModel>> GetReviews();
+        Task<IEnumerable<ForumMessageViewModel>> GetMessages();
     }
 }

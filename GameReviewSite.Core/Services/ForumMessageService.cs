@@ -17,17 +17,22 @@ namespace GameReviewSite.Core.Services
         {
             try
             {
+                model.Date = DateTime.Now.ToString();
+                model.UserId = userId;
+
                 await data.ForumMessages.AddAsync(model);
                 await data.SaveChangesAsync();
+                return true;
             }
             catch (Exception)
             {
 
                 throw;
+                return false;
             }
         }
 
-        public async Task<IEnumerable<ForumMessageViewModel>> GetReviews()
+        public async Task<IEnumerable<ForumMessageViewModel>> GetMessages()
         {
             var reviews = await data.Reviews
                 .Include(x => x.User)

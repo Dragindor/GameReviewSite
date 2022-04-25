@@ -1,4 +1,5 @@
 ﻿using GameReviewSite.Core.Contracts;
+using GameReviewSite.Core.Models;
 using GameReviewSite.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,9 +14,9 @@ namespace GameReviewSite.Core.Services
             data = _data;
         }
 
-        public async Task<bool> AddReviewToGame(Review model,string gameId)
+        public async Task<bool> AddReviewToGame(Review model)
         {
-            var game = await data.Games.Where(x => x.Id == gameId)
+            var game = await data.Games.Where(x => x.Id == model.GameId)
                 .Include(x => x.Reviews)
                 .FirstOrDefaultAsync();
 
@@ -25,20 +26,28 @@ namespace GameReviewSite.Core.Services
             }
             try
             {
-                game.Reviews.Add(model);
+                Review review = new Review()
+                {
+                    GameId = game.Id,
+                    Description = model.Description,
+                    Date = DateTime.Now.ToString(),
+                    Rating=model.Rating,
+                    UserId=model.UserId     
+            };
+                game.Reviews.Add(review);
 
                 double score = 0;
 
-                foreach (var review in game.Reviews)
+                foreach (var rating in game.Reviews)
                 {
-                    score += review.Rating;
+                    score += rating.Rating;
                 }
 
                 score = score / game.Reviews.Count();
 
                 game.Rating = score;
 
-                await data.Reviews.AddAsync(model);
+                await data.Reviews.AddAsync(review);
                 await data.SaveChangesAsync();
 
                 return true;
@@ -54,6 +63,25 @@ namespace GameReviewSite.Core.Services
         {
             var reviews = await data.Reviews
                 .Include(x => x.Comments)
+                .ToListAsync();
+
+            return reviews;
+        }
+
+        public async Task<List<AllGameReviewsViewModel>> GetReviewsByGame(string id)
+        {
+            var reviews = await data.Reviews
+                .Include(x=>x.User)
+                .Where(x=>x.GameId==id)
+                .Select(x=>new AllGameReviewsViewModel
+                {
+                    id=x.Id,
+                    UserName=x.User.UserName,
+                    Date=x.Date,
+                    Description=x.Description,
+                    Rating=x.Rating,
+                    commentsCount=x.Comments.Count()
+                })
                 .ToListAsync();
 
             return reviews;

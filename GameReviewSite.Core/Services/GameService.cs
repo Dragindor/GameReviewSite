@@ -88,6 +88,7 @@ namespace GameReviewSite.Core.Services
                     Tag=x.Tags.Select(x=>x.Name).FirstOrDefault(),
                     ReviewsCount=x.Reviews.Count()
                 })
+                .OrderByDescending(x=>x.Rating)
                 .ToListAsync();
         }
         public async Task<IEnumerable<ManageGamesViewModel>> GetGamesToManage()

@@ -1,0 +1,43 @@
+﻿@using GameReviewSite.Core.Models
+@model IEnumerable<ForumMessageViewModel>
+<!-- Page section -->
+	<section class="page-section community-page set-bg" data-setbg="img/community-bg.jpg">
+		<div class="community-warp spad">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h3 class="community-top-title">All Members (344)</h3>
+					</div>
+					<div class="col-md-6 text-lg-right">
+						<form class="community-filter">
+							<label for="fdf5">Show</label>
+							<select id="fdf5">
+								<option value="#">Everything</option>
+								<option value="#">Everything</option>
+							</select>
+						</form>
+					</div>
+				</div>
+				<ul class="community-post-list">
+					@foreach (var item in Model)
+					{
+					<li>
+						<div class="community-post">							
+							<div class="post-content">
+								<h5>@item.UserName<span>posted an update</span></h5>
+								<div class="post-date">@item.Date</div>
+								<p>@item.Description</p>
+							</div>
+						</div>
+					</li>
+					}y									
+				</ul>
+				<div class="site-pagination sp-style-2">
+					<span class="active">01.</span>
+					<a href="#">02.</a>
+					<a href="#">03.</a>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page section end -->

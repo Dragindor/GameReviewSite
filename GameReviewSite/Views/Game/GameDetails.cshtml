@@ -1,5 +1,5 @@
 ﻿@using GameReviewSite.Infrastructure.Data
-@model Game
+@model dynamic
 @{
 	ViewData["Title"] = "Game Details";
 }
@@ -33,15 +33,101 @@
 		border: 5px transparent;
 		padding: 10px;
 	}
+
+	.rating {
+		display: inline-block;
+		position: relative;
+		height: 50px;
+		line-height: 50px;
+		font-size: 50px;
+	}
+
+		.rating label {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			cursor: pointer;
+		}
+
+			.rating label:last-child {
+				position: static;
+			}
+
+			.rating label:nth-child(1) {
+				z-index: 10;
+			}
+
+			.rating label:nth-child(2) {
+				z-index: 9;
+			}
+
+			.rating label:nth-child(3) {
+				z-index: 8;
+			}
+
+			.rating label:nth-child(4) {
+				z-index: 7;
+			}
+
+			.rating label:nth-child(5) {
+				z-index: 6;
+			}
+
+			.rating label:nth-child(6) {
+				z-index: 5;
+			}
+
+			.rating label:nth-child(7) {
+				z-index: 4;
+			}
+
+			.rating label:nth-child(8) {
+				z-index: 3;
+			}
+
+			.rating label:nth-child(9) {
+				z-index: 2;
+			}
+
+			.rating label:nth-child(10) {
+				z-index: 1;
+			}
+
+			.rating label input {
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0;
+			}
+
+			.rating label .icon {
+				float: left;
+				color: transparent;
+			}
+
+			.rating label:last-child .icon {
+				color: #6b6b6b;
+			}
+
+		.rating:not(:hover) label input:checked ~ .icon,
+		.rating:hover label:hover input ~ .icon {
+			color: #09f;
+		}
+
+		.rating label input:focus:not(:checked) ~ .icon:last-child {
+			color: #6b6b6b;
+			text-shadow: 0 0 5px #09f;
+		}
 </style>
 
 <!-- Page info section -->
-<section class="page-info-section set-bg" data-setbg="@Model.Image">
+<section class="page-info-section set-bg" data-setbg="@Model.Game.Image">
 	<div class="pi-content">
 		<div class="container">
 			<div class="row">
 				<div class="text-white" style="text-shadow: 8px 4px 8px #000000;">
-					<h1><b>@Model.Name</b></h1>
+					<h1><b>@Model.Game.Name</b></h1>
 				</div>
 			</div>
 		</div>
@@ -59,26 +145,26 @@
 							<h4>Description</h4>
 						</div>
 						<p style="font-size: 20px; color: black;">
-							@Model.Description
+							@Model.Game.Description
 						</p>
 						<div class="row">
 							<div class="col-lg-6 col-md-6">
 								<ul>
-									<li><span><b>Developer:</b></span> @Model.Developer</li>
-									<li><span><b>Publisher:</b></span> @Model.Publisher</li>
-									<li><span><b>ReleaseDate:</b></span> @Model.ReleaseDate</li>
+									<li><span><b>Developer:</b></span> @Model.Game.Developer</li>
+									<li><span><b>Publisher:</b></span> @Model.Game.Publisher</li>
+									<li><span><b>ReleaseDate:</b></span> @Model.Game.ReleaseDate</li>
 								</ul>
 							</div>
 							<div class="col-lg-6 col-md-6">
 								<ul>
-									<li><span><b>Tags:</b></span> Action, Adventure, Fantasy, Magic</li>
-									<li><span><b>Rating:</b></span> @Model.Rating</li>
+									<li><span><b>Tags:</b></span> @Model.Game.Tags</li>
+									<li><span><b>Rating:</b></span> @Model.Game.Rating</li>
 								</ul>
 							</div>
 						</div>
 						<div class="custom-center">
 							<div class="text-lg-center custom-box custom-price">
-								<h5>Price: @Model.Price€</h5>
+								<h5>Price: @Model.Game.Price€</h5>
 							</div>
 						</div>
 					</div>
@@ -87,10 +173,122 @@
 					<div class="section-title">
 						<h4>Your Comment</h4>
 					</div>
-					<form action="#" class="custom-center" style="width: 90%;">
-						<textarea placeholder="Your Review Text" class="custom-box"></textarea>
+					<form id="createReview" enctype="multipart/form-data" method="post" class="custom-center" style="width: 90%;">
+
+						<div class="form-group">
+							<input value="@Model.Game.Id" name="GameId" hidden class="form-control" />
+						</div>
+
+						<textarea value="@ViewBag.Description" name="Description" placeholder="Your Review Text" class="custom-box"></textarea>
+						<div style="margin-top: 10px; margin-bottom: 10px;">
+							<h5>Your Rating</h5>
+						</div>
+						<!--<div class="position-relative rating" style="text-align: left; margin-bottom: 20px; margin-top: 0px;">
+							<label>
+								<input type="radio" name="stars" value="1" />
+								<span class="icon">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="2" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="3" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="4" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="5" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="6" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="7" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="8" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="9" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+							</label>
+							<label>
+								<input type="radio" name="stars" value="10" />
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+								<span class="icon">★</span>
+							</label>
+
+						</div>-->
+						<form action="#">
+							<label for="lang">Rating</label>
+							<select value="@ViewBag.Rating" name="Rating" id="lang" size="8">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+							</select>
+							<input type="submit" value="Submit"/>
+						</form>
 						<br />
-						<button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
+						<button id="reviewSubmit" type="submit"><i class="fa fa-location-arrow"></i> Review</button>
 					</form>
 				</div>
 				<div class="custom-box col-lg-12">
@@ -98,66 +296,18 @@
 						<div class="section-title">
 							<h4>Reviews</h4>
 						</div>
-						<div class="game__review__item">
-							<div class="game__review__item__pic">
-								<img src="~/img/game/review-1.jpg" alt="">
+						@foreach (var review in Model.Review)
+						{
+							<div class="game__review__item">
+								<div class="game__review__item__text">
+									<h6>review.UserName <span>review.Date</span></h6>
+									<p>
+										review.Description
+									</p>
+								</div>
 							</div>
-							<div class="game__review__item__text">
-								<h6>Chris Curry - <span>1 Hour ago</span></h6>
-								<p>
-									whachikan Just noticed that someone categorized this as belonging to the genre
-									"demons" LMAO
-								</p>
-							</div>
-						</div>
-						<div class="game__review__item">
-							<div class="game__review__item__pic">
-								<img src="~/img/game/review-2.jpg" alt="">
-							</div>
-							<div class="game__review__item__text">
-								<h6>Lewis Mann - <span>5 Hour ago</span></h6>
-								<p>Finally it came out ages ago</p>
-							</div>
-						</div>
-						<div class="game__review__item">
-							<div class="game__review__item__pic">
-								<img src="~/img/game/review-3.jpg" alt="">
-							</div>
-							<div class="game__review__item__text">
-								<h6>Louis Tyler - <span>20 Hour ago</span></h6>
-								<p>Where is the episode 15 ? Slow update! Tch</p>
-							</div>
-						</div>
-						<div class="game__review__item">
-							<div class="game__review__item__pic">
-								<img src="~/img/game/review-4.jpg" alt="">
-							</div>
-							<div class="game__review__item__text">
-								<h6>Chris Curry - <span>1 Hour ago</span></h6>
-								<p>
-									whachikan Just noticed that someone categorized this as belonging to the genre
-									"demons" LOL
-								</p>
-							</div>
-						</div>
-						<div class="game__review__item">
-							<div class="game__review__item__pic">
-								<img src="~/img/game/review-5.jpg" alt="">
-							</div>
-							<div class="game__review__item__text">
-								<h6>Lewis Mann - <span>5 Hour ago</span></h6>
-								<p>Finally it came out ages ago</p>
-							</div>
-						</div>
-						<div class="game__review__item">
-							<div class="game__review__item__pic">
-								<img src="~/img/game/review-6.jpg" alt="">
-							</div>
-							<div class="game__review__item__text">
-								<h6>Louis Tyler - <span>20 Hour ago</span></h6>
-								<p>Where is the episode 15 ? Slow update! Tch</p>
-							</div>
-						</div>
+						}
+
 					</div>
 				</div>
 			</div>

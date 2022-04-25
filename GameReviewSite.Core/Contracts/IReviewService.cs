@@ -1,11 +1,14 @@
-﻿using GameReviewSite.Infrastructure.Data;
+﻿using GameReviewSite.Core.Models;
+using GameReviewSite.Infrastructure.Data;
 
 namespace GameReviewSite.Core.Contracts
 {
     public interface IReviewService
     {
-        Task<bool> AddReviewToGame(Review model, string gameId);
+        Task<bool> AddReviewToGame(Review model);
 
         Task<IEnumerable<Review>> GetReviews();
+
+        Task<List<AllGameReviewsViewModel>> GetReviewsByGame(string id);
     }
 }
