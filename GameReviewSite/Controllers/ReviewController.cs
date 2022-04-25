@@ -1,4 +1,5 @@
 ﻿using GameReviewSite.Core.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GameReviewSite.Controllers
 {
@@ -13,6 +14,11 @@ namespace GameReviewSite.Controllers
             this.reviewService = reviewService;
         }
 
+        public async Task<IActionResult> ManageReviews()
+        {
+            var reviews = await reviewService.GetReviews();
 
+            return View(reviews);
+        }
     }
 }

@@ -63,6 +63,8 @@ namespace GameReviewSite.Core.Services
         {
             var reviews = await data.Reviews
                 .Include(x => x.Comments)
+                .Include(x=>x.Game)
+                .Include(x=>x.User)
                 .ToListAsync();
 
             return reviews;

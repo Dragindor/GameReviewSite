@@ -298,11 +298,11 @@
 						</div>
 						@foreach (var review in Model.Review)
 						{
-							<div class="game__review__item">
+							<div class="custom-box game__review__item">
 								<div class="game__review__item__text">
-									<h6>review.UserName <span>review.Date</span></h6>
+									<h6>@review.UserName <span>@review.Date</span></h6>
 									<p>
-										review.Description
+										@review.Description
 									</p>
 								</div>
 							</div>

@@ -1,0 +1,49 @@
+﻿@using GameReviewSite.Core.Models
+@using GameReviewSite.Infrastructure.Data
+@model IEnumerable<Review>
+@{
+}
+<div>
+	<div class="col-12">
+		<div>
+			<div>
+				<h3 class="card-title">Application Reviews</h3>
+				<div class="card-tools row">
+					<div class="col-lg-2">
+						<button type="button" class="nav-link btn btn-primary btn-block text-white">
+							<a asp-area="" asp-controller="Review" asp-action="AddReview">Add Review</a>
+						</button>
+					</div>
+				</div>
+			</div>
+			<div class="card-body table-responsive p-0">
+				<table class="table text-nowrap">
+					<thead>
+						<tr>
+							<th>GameName</th>
+							<th>UserName</th>
+							<th>Date</th>
+							<th>Description</th>
+							<th>Rating</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var review in Model)
+						{
+							<tr>
+								<td>@review.Game.Name</td>
+								<td>@review.User.UserName</td>
+								<td>@review.Date</td>
+								<td>@review.Description</td>
+								<td>@review.Rating</td>
+								<td>
+									<a asp-area="" asp-action="edit" asp-controller="game" asp-route-id="@review.Id" class="btn btn-block btn-outline-info btn-xs">Edit</a>									
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
