@@ -80,6 +80,7 @@ namespace GameReviewSite.Infrastructure.Data
         public DbSet<Review> Reviews { get; set; }
 
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<ForumMessage> ForumMessages { get; set; }
 
     }
 }

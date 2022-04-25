@@ -64,32 +64,6 @@
 					<li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
 
 					<li>
-						@if (User.IsInRole("Admin"))
-						{
-						/*<a href="#">Management <span class="arrow_carrot-down"></span></a>
-							<ul class="dropdown">
-							<li>
-							@if (User.IsInRole("Admin"))
-							{
-							<a asp-area="Admin" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a>
-							}
-							</li>
-							<li>
-							<a asp-area="" asp-controller="Game" asp-action="ManageGames">Manage Games</a>
-							</li>
-							<li>
-							<a asp-area="" asp-controller="Tag" asp-action="ManageTags">Manage Tags</a>
-							</li>
-							</ul>*/
-
-							/*<a href="#">Management <span class="arrow_carrot-down"></span></a>
-							<div class="dropdown-menu">*/
-								<a asp-area="Admin" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a>
-								<a asp-area="" asp-controller="Game" asp-action="ManageGames">Manage Games</a>
-								<a asp-area="" asp-controller="Tag" asp-action="ManageTags">Manage Tags</a>
-							
-						}
-					</li>
 					<li>
 						@if (User.Identity.IsAuthenticated)
 						{
@@ -97,6 +71,16 @@
 						}
 					</li>
 				</ul>
+				<ul>
+					<li>
+						@if (User.IsInRole("Admin"))
+						{
+								<a asp-area="Admin" asp-controller="Admin" asp-action="ManageUsers">Manage Users</a>
+								<a asp-area="" asp-controller="Game" asp-action="ManageGames">Manage Games</a>
+								<a asp-area="" asp-controller="Tag" asp-action="ManageTags">Manage Tags</a>							
+						}
+					</li>
+					</ul>
 			</nav>
 		</div>
 	</header>

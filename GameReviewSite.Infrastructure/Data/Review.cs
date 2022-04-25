@@ -21,7 +21,6 @@ namespace GameReviewSite.Infrastructure.Data
 
         public Game Game { get; set; }
 
-
         [Required]
         public string Date { get; set; }
 

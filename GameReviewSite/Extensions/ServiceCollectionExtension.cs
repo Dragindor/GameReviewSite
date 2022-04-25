@@ -14,7 +14,9 @@ namespace Microsoft.Extensions.DependencyInjection
            services.AddScoped<IApplicationDbRepository, ApplicationDbRepository>();
            services.AddScoped<IUserService, UserService>();
            services.AddScoped<IGameService, GameService>();
-           services.AddScoped<ITagService, TagService>();
+           services.AddScoped<IReviewService, ReviewService>();
+           services.AddScoped<ICommentService, CommentService>();
+           services.AddScoped<IForumMessageService, ForumMessageService>();
    
            return services;
        }
