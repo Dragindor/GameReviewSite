@@ -151,15 +151,9 @@
 					<br />
 				</form>
 			</div>
-			@if (@Model.Review.Comments.Count() == 0)
-			{
-				<h5>No Comments</h5>
-			}
-			else
-			{
 				<div class="row">
 					<div class="col-md-6">
-						<h3 class="community-top-title">All Comments (@Model.Comment.Count())</h3>
+						<h3 class="community-top-title">All Comments</h3>
 					</div>
 					<div class="col-md-6 text-lg-right">
 						<form class="community-filter">
@@ -184,14 +178,7 @@
 							</div>
 						</li>
 					}
-				</ul>
-				<div class="site-pagination sp-style-2">
-					<span class="active">01.</span>
-					<a href="#">02.</a>
-					<a href="#">03.</a>
-				</div>
-			}
-
+				</ul>			
 	</div>
 </section>
 <!-- Page section end -->

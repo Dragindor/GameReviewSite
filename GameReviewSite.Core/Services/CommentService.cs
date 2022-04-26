@@ -48,6 +48,7 @@ namespace GameReviewSite.Core.Services
         {
             var comments = await data.Comments
                 .Include(x => x.User)
+                .Where(x=>x.ReviewId==id)
                 .ToListAsync();
 
             return comments;
