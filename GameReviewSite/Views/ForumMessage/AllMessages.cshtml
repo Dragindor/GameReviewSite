@@ -1,28 +1,22 @@
 ﻿@using GameReviewSite.Core.Models
 @model IEnumerable<ForumMessageViewModel>
 <!-- Page section -->
-	<section class="page-section community-page set-bg" data-setbg="img/community-bg.jpg">
-		<div class="community-warp spad">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<h3 class="community-top-title">All Members (344)</h3>
-					</div>
-					<div class="col-md-6 text-lg-right">
-						<form class="community-filter">
-							<label for="fdf5">Show</label>
-							<select id="fdf5">
-								<option value="#">Everything</option>
-								<option value="#">Everything</option>
-							</select>
-						</form>
-					</div>
+<section class="page-section community-page set-bg" data-setbg="https://www.freeunibg.eu/wp-content/uploads/2022/03/Add-a-free-forum-in-Weebly.gif">
+	<div class="community-warp spad">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2 text-lg-right">
+					<button type="button" class="nav-link btn btn-primary btn-block text-white">
+						<a asp-area="" asp-controller="ForumMessage" asp-action="AddMessage">Add Message</a>
+					</button>
 				</div>
-				<ul class="community-post-list">
-					@foreach (var item in Model)
-					{
+			</div>
+			<br></br>
+			<ul class="community-post-list">
+				@foreach (var item in Model)
+				{
 					<li>
-						<div class="community-post">							
+						<div class="community-post">
 							<div class="post-content">
 								<h5>@item.UserName<span>posted an update</span></h5>
 								<div class="post-date">@item.Date</div>
@@ -30,14 +24,9 @@
 							</div>
 						</div>
 					</li>
-					}y									
-				</ul>
-				<div class="site-pagination sp-style-2">
-					<span class="active">01.</span>
-					<a href="#">02.</a>
-					<a href="#">03.</a>
-				</div>
-			</div>
+				}
+			</ul>
 		</div>
-	</section>
-	<!-- Page section end -->
+	</div>
+</section>
+<!-- Page section end -->

@@ -17,31 +17,34 @@ namespace GameReviewSite.Core.Services
         {
             try
             {
-                model.Date = DateTime.Now.ToString();
-                model.UserId = userId;
+                ForumMessage forum = new ForumMessage()
+                {
+                    UserId = userId,
+                    Date = DateTime.Now.ToString(),
+                    Description = model.Description,
+                };
 
-                await data.ForumMessages.AddAsync(model);
+                await data.ForumMessages.AddAsync(forum);
                 await data.SaveChangesAsync();
                 return true;
             }
             catch (Exception)
             {
 
-                throw;
                 return false;
             }
         }
 
         public async Task<IEnumerable<ForumMessageViewModel>> GetMessages()
         {
-            var reviews = await data.Reviews
+            var reviews = await data.ForumMessages
                 .Include(x => x.User)
-                .Select(x=>new ForumMessageViewModel
+                .Select(x => new ForumMessageViewModel
                 {
-                    Id=x.Id,
-                    Date=x.Date,
-                    UserName=x.User.UserName,
-                    Description=x.Description
+                    Id = x.Id,
+                    Date = x.Date,
+                    UserName = x.User.UserName,
+                    Description = x.Description
                 })
                 .ToListAsync();
 
