@@ -13,9 +13,9 @@ namespace GameReviewSite.Core.Services
             data = _data;
         }
 
-        public async Task<bool> AddReviewToGame(Comment model, string reviewId)
+        public async Task<bool> AddCommentToReview(Comment model)
         {
-            var review = await data.Reviews.Where(x => x.Id == reviewId)
+            var review = await data.Reviews.Where(x => x.Id == model.ReviewId)
                 .FirstOrDefaultAsync();
 
             if (review == null)
@@ -24,9 +24,16 @@ namespace GameReviewSite.Core.Services
             }
             try
             {
-                review.Comments.Add(model);
+                Comment comment = new Comment()
+                {
+                    ReviewId=model.ReviewId,
+                    Description = model.Description,
+                    Date = DateTime.Now.ToString(),
+                    UserId = model.UserId
+                };
+                review.Comments.Add(comment);
 
-                await data.Comments.AddAsync(model);
+                await data.Comments.AddAsync(comment);
                 await data.SaveChangesAsync();
 
                 return true;
@@ -37,12 +44,23 @@ namespace GameReviewSite.Core.Services
             }
         }
 
-        public async Task<IEnumerable<Comment>> GetReviews()
+        public async Task<List<Comment>> GetCommentsByReview(string id)
         {
-            var reviews = await data.Comments
+            var comments = await data.Comments
+                .Include(x => x.User)
                 .ToListAsync();
 
-            return reviews;
+            return comments;
+        }
+
+        public async Task<IEnumerable<Comment>> GetComments()
+        {
+            var comments = await data.Comments
+                .Include(x=>x.User)
+                .Include(x=>x.Review)
+                .ToListAsync();
+
+            return comments;
         }
     }
 }

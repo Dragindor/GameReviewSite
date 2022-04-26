@@ -1,0 +1,197 @@
+﻿@using GameReviewSite.Core.Models
+@using GameReviewSite.Infrastructure.Data
+@model dynamic
+<style>
+	.custom-box {
+		box-shadow: 0px 0px 6px 0px #000000;
+		border-radius: 8px;
+		border: 1px solid transparent;
+		border-color: gray;
+		padding-top: 40px;
+		padding-right: 40px;
+		padding-bottom: 40px;
+		padding-left: 40px;
+		margin-bottom: 40px;
+	}
+
+	.custom-price {
+		margin-bottom: 0px;
+		margin-top: 20px;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-left: 10px;
+		padding-right: 10px;
+		vertical-align: middle;
+	}
+
+	.custom-center {
+		margin: auto;
+		width: 20%;
+		border: 5px transparent;
+		padding: 10px;
+	}
+
+	.rating {
+		display: inline-block;
+		position: relative;
+		height: 50px;
+		line-height: 50px;
+		font-size: 50px;
+	}
+
+		.rating label {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			cursor: pointer;
+		}
+
+			.rating label:last-child {
+				position: static;
+			}
+
+			.rating label:nth-child(1) {
+				z-index: 10;
+			}
+
+			.rating label:nth-child(2) {
+				z-index: 9;
+			}
+
+			.rating label:nth-child(3) {
+				z-index: 8;
+			}
+
+			.rating label:nth-child(4) {
+				z-index: 7;
+			}
+
+			.rating label:nth-child(5) {
+				z-index: 6;
+			}
+
+			.rating label:nth-child(6) {
+				z-index: 5;
+			}
+
+			.rating label:nth-child(7) {
+				z-index: 4;
+			}
+
+			.rating label:nth-child(8) {
+				z-index: 3;
+			}
+
+			.rating label:nth-child(9) {
+				z-index: 2;
+			}
+
+			.rating label:nth-child(10) {
+				z-index: 1;
+			}
+
+			.rating label input {
+				position: absolute;
+				top: 0;
+				left: 0;
+				opacity: 0;
+			}
+
+			.rating label .icon {
+				float: left;
+				color: transparent;
+			}
+
+			.rating label:last-child .icon {
+				color: #6b6b6b;
+			}
+
+		.rating:not(:hover) label input:checked ~ .icon,
+		.rating:hover label:hover input ~ .icon {
+			color: #09f;
+		}
+
+		.rating label input:focus:not(:checked) ~ .icon:last-child {
+			color: #6b6b6b;
+			text-shadow: 0 0 5px #09f;
+		}
+</style>
+<!-- Page section -->
+<section class="page-section community-page set-bg" data-setbg="img/community-bg.jpg">
+	<div class="container">
+			<div class="custom-box col-lg-12">
+				<div class="text-lg-center" style="margin-bottom: 10px;">
+					<h4>Description</h4>
+				</div>
+				<p style="font-size: 20px; color: black;">
+					@Model.Review.Description
+				</p>
+				<div class="row">
+					<div class="col-lg-6 col-md-6">
+						<ul>
+							<li><span><b>Creator:</b></span> @Model.Review.User.UserName</li>
+							<li><span><b>Date:</b></span> @Model.Review.Date</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="custom-box col-lg-12">
+				<div class="section-title">
+					<h4>Write a Comment</h4>
+				</div>
+				<form id="createComment" enctype="multipart/form-data" method="post" class="custom-center" style="width: 90%;">
+
+					<div class="form-group">
+						<input value="@Model.Review.Id" name="ReviewId" hidden class="form-control" />
+					</div>
+
+					<textarea value="@ViewBag.Description" name="Description" placeholder="Your Comment Text" class="custom-box"></textarea>
+					<input type="submit" value="Submit" />
+					<br />
+				</form>
+			</div>
+			@if (@Model.Review.Comments.Count() == 0)
+			{
+				<h5>No Comments</h5>
+			}
+			else
+			{
+				<div class="row">
+					<div class="col-md-6">
+						<h3 class="community-top-title">All Comments (@Model.Comment.Count())</h3>
+					</div>
+					<div class="col-md-6 text-lg-right">
+						<form class="community-filter">
+							<label for="fdf5">Show</label>
+							<select id="fdf5">
+								<option value="#">Everything</option>
+								<option value="#">Everything</option>
+							</select>
+						</form>
+					</div>
+				</div>
+				<ul class="community-post-list">
+					@foreach (var comment in Model.Comment)
+					{
+						<li>
+							<div class="community-post">
+								<div class="post-content">
+									<h5>@comment.User.UserName<span>posted an update</span></h5>
+									<div class="post-date">@comment.Date</div>
+									<p>@comment.Description</p>
+								</div>
+							</div>
+						</li>
+					}
+				</ul>
+				<div class="site-pagination sp-style-2">
+					<span class="active">01.</span>
+					<a href="#">02.</a>
+					<a href="#">03.</a>
+				</div>
+			}
+
+	</div>
+</section>
+<!-- Page section end -->

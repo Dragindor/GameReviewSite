@@ -95,6 +95,7 @@ namespace GameReviewSite.Controllers
             return View(model);   
         }
 
+        [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
             var model = await gameService.GetGameForEdit(id);
@@ -118,7 +119,9 @@ namespace GameReviewSite.Controllers
             }
 
             return View(model);
-        }    
+        }
+
+        [HttpGet]
         public async Task<IActionResult> ManageGames()
         {
             var games = await gameService.GetGamesToManage();

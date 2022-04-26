@@ -4,8 +4,10 @@ namespace GameReviewSite.Core.Contracts
 {
     public interface ICommentService
     {
-        Task<bool> AddReviewToGame(Comment model, string gameId);
+        Task<bool> AddCommentToReview(Comment model);
 
-        Task<IEnumerable<Comment>> GetReviews();
+        Task<IEnumerable<Comment>> GetComments();
+
+        Task<List<Comment>> GetCommentsByReview(string id);
     }
 }

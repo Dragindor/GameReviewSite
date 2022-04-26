@@ -59,6 +59,17 @@ namespace GameReviewSite.Core.Services
             
         }
 
+        public async Task<Review> GetReviewById(string id)
+        {
+            var reviews = await data.Reviews
+                .Include(x => x.Comments)
+                .Include(x=>x.User)
+                .Where(x => x.Id==id)
+                .FirstOrDefaultAsync();
+
+            return reviews;
+        }
+
         public async Task<IEnumerable<Review>> GetReviews()
         {
             var reviews = await data.Reviews
