@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace GameReviewSite.Core.Models
 {
-    public class AllGameReviewsViewModel
+    public class RecentReviewsViewModel
     {
         public string Id { get; set; }
-        public string UserName { get; set; }
+        public string GameId { get; set; }
+        public string GameName { get; set; }
+        public string Image { get; set; }
 
         public string Date { get; set; }
 

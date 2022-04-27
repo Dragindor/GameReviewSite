@@ -38,7 +38,14 @@
 									}
 								</td>
 								<td>@game.Name</td>
-								<td>@game.Price€</td>
+									@if(@game.Price==0)
+								{
+									<td>Free To Play</td>
+								}
+								else
+								{
+									<td>@game.Price€</td>
+								}	
 								<td>@game.Developer</td>
 								<td>@game.Publisher</td>
 								<td>@game.ReleaseDate</td>

@@ -8,6 +8,7 @@ namespace GameReviewSite.Core.Contracts
         Task<bool> AddReviewToGame(Review model);
 
         Task<IEnumerable<Review>> GetReviews();
+        Task<IEnumerable<RecentReviewsViewModel>> GetRecentReviews();
 
         Task<List<AllGameReviewsViewModel>> GetReviewsByGame(string id);
         Task<Review> GetReviewById(string id);

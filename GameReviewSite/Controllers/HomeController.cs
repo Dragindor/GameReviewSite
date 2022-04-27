@@ -1,7 +1,9 @@
-﻿using GameReviewSite.Models;
+﻿using GameReviewSite.Core.Contracts;
+using GameReviewSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 using System.Diagnostics;
+using System.Dynamic;
 
 namespace GameReviewSite.Controllers
 {
@@ -10,41 +12,27 @@ namespace GameReviewSite.Controllers
         private readonly ILogger<HomeController> logger;
 
         private readonly IDistributedCache cache;
-        public HomeController(ILogger<HomeController> _logger, IDistributedCache _cache)
+        private readonly IGameService gameService;
+        private readonly ITagService tagService;
+        private readonly IReviewService reviewService;
+        public HomeController(ILogger<HomeController> _logger, IDistributedCache _cache, IGameService gameService,
+             ITagService tagService, IReviewService reviewService)
         {
+            this.reviewService = reviewService;
+            this.gameService = gameService;
+            this.tagService = tagService;
             logger = _logger;
             cache = _cache;
         }
 
-        //public async Task<IActionResult> Index()
-        //{
-        //    DateTime dateTime = DateTime.Now;
-        //    var cachedData = await cache.GetStringAsync("cachedTime");
-        //
-        //    if (cachedData == null)
-        //    {
-        //        cachedData = dateTime.ToString();
-        //        DistributedCacheEntryOptions distributedCacheOptions = new DistributedCacheEntryOptions()
-        //        {
-        //            SlidingExpiration = TimeSpan.FromSeconds(45),
-        //            AbsoluteExpiration = DateTime.Now.AddSeconds(90)
-        //        };
-        //
-        //        await cache.SetStringAsync("cachedTime", cachedData, distributedCacheOptions);
-        //    }
-        //
-        //    return View(nameof(Index), cachedData);
-        //}
-
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            dynamic mymodel = new ExpandoObject();
+            mymodel.Game = await gameService.GetRecentGames();
+            mymodel.Review = await reviewService.GetRecentReviews();
+
+            return View(mymodel);
         }      
-
-        public IActionResult Reviews()
-        {
-            return View();
-        }
 
         public IActionResult Contact()
         {
@@ -56,10 +44,5 @@ namespace GameReviewSite.Controllers
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

@@ -3,6 +3,7 @@ using GameReviewSite.Core.Models;
 using GameReviewSite.Infrastructure.Data;
 using GameReviewSite.Infrastructure.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Text;
 
 namespace GameReviewSite.Core.Services
 {
@@ -169,14 +170,67 @@ namespace GameReviewSite.Core.Services
             return false;
         }
 
-        public async Task<Game> GetGameById(string id)
+        public async Task<GameDetailsViewModel> GetGameById(string id)
         {
-            var game = await data.Games.Where(x => x.Id == id)
-                .Include(x => x.Tags)
-                .FirstOrDefaultAsync();
+                var game = await data.Games.Where(x => x.Id == id)
+                    .Include(x => x.Reviews)
+                    .Include(x => x.Tags)
+                    .FirstOrDefaultAsync();
 
-            return game;
+                if (game == null)
+                {
+                    throw new ArgumentNullException(nameof(game));
+                }
 
+                StringBuilder sb = new StringBuilder();
+
+                foreach (var tag in game.Tags)
+                {
+                    sb.Append($"{tag.Name}, ");
+                }
+
+                string Tags = sb.ToString().TrimEnd();
+                var gameView = new GameDetailsViewModel()
+                {
+                    Id = game.Id,
+                    Name = game.Name,
+                    Image = game.Image,
+                    ReleaseDate = game.ReleaseDate,
+                    Description = game.Description,
+                    Rating = game.Rating,
+                    Developer = game.Developer,
+                    Publisher = game.Publisher,
+                    Tags = Tags,
+                    Price = game.Price,
+                    ReviewsCount = game.Reviews.Count,
+                };
+
+                return gameView;
+            
+
+        }
+
+        public async Task<IEnumerable<AllGamesViewModel>> GetRecentGames()
+        {
+            var recentGames=data.Games
+                .Include(x=>x.Tags)
+                .Include(x=>x.Reviews)
+                .Select(x => new AllGamesViewModel()
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    Image = x.Image,
+                    Rating = x.Rating,
+                    Price = x.Price,
+                    Developer = x.Developer,
+                    Publisher = x.Publisher,
+                    ReleaseDate = x.ReleaseDate,
+                    Tag = x.Tags.Select(x => x.Name).FirstOrDefault(),
+                    ReviewsCount = x.Reviews.Count()
+                }).ToList()
+                .TakeLast(3)
+                .ToList();
+            return recentGames;           
         }
     }    
 }

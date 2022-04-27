@@ -30,7 +30,14 @@
 								<div class="rgi-content">
 									<h5><a asp-area="" asp-action="GameDetails" asp-controller="Game" asp-route-id="@game.Id" class="btn btn-block btn-outline-info btn-xs">@game.Name</a></h5>
 									<p><b>Developer:</b> @game.Developer</p>
+									@if(@game.Price==0)
+								{
+									<p><b>Price:</b> Free To Play</p>
+								}
+								else
+								{
 									<p><b>Price:</b> @game.Price€</p>
+								}	
 									<a href="#" class="comment"><b>Reviews:</b> @game.ReviewsCount</a>
 									<div class="rgi-extra">
 										<p><b>Rating:</b> @game.Rating</p>

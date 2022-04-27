@@ -59,6 +59,27 @@ namespace GameReviewSite.Core.Services
             
         }
 
+        public async Task<IEnumerable<RecentReviewsViewModel>> GetRecentReviews()
+        {
+            var reviews = await data.Reviews
+                .Include(x => x.Comments)
+                .Include(x => x.Game)
+                .Select(x => new RecentReviewsViewModel
+                {
+                    Id = x.Id,
+                    GameId = x.Game.Id,
+                    Image = x.Game.Image,
+                    GameName = x.Game.Name,
+                    Date = x.Date,
+                    Description = x.Description,
+                    Rating = x.Rating,
+                    commentsCount = x.Comments.Count()
+                })
+                .ToListAsync();
+
+            return reviews;
+        }
+
         public async Task<Review> GetReviewById(string id)
         {
             var reviews = await data.Reviews
@@ -88,7 +109,7 @@ namespace GameReviewSite.Core.Services
                 .Where(x=>x.GameId==id)
                 .Select(x=>new AllGameReviewsViewModel
                 {
-                    id=x.Id,
+                    Id=x.Id,
                     UserName=x.User.UserName,
                     Date=x.Date,
                     Description=x.Description,

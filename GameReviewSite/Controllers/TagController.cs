@@ -50,14 +50,6 @@ namespace GameReviewSite.Controllers
             }
 
             return View();
-            //try
-            //{
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //catch
-            //{
-            //    return View();
-            //}
         }
 
         public async Task<IActionResult> Edit(string id)

@@ -102,25 +102,15 @@ namespace GameReviewSite.Areas.Admin.Controllers
             return View(model);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> CreateRole(string roleName)
-        //{
-        //    if (roleName != null)
-        //    {
-        //        await roleManager.CreateAsync(new IdentityRole(roleName.Trim()));
-        //    }
 
+        //public async Task<IActionResult> CreateRole()
+        //{
+        //    await roleManager.CreateAsync(new IdentityRole()
+        //    {
+        //        Name = "Editor"
+        //    });
+        //
         //    return Ok();
         //}
-
-        public async Task<IActionResult> CreateRole()
-        {
-            await roleManager.CreateAsync(new IdentityRole()
-            {
-                Name = "Editor"
-            });
-
-            return Ok();
-        }
     }
 }
