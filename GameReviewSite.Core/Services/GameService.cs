@@ -17,9 +17,9 @@ namespace GameReviewSite.Core.Services
             repo = _repo;
         }
 
-        public async Task<bool> GameAlreadyExist(string name)
+        public async Task<bool> GameAlreadyExist(string name) //UnitTests Done
         {
-            var game= await data.Games.FirstOrDefaultAsync(x=>x.Name==name);
+            var game = await data.Games.FirstOrDefaultAsync(x=>x.Name==name);
 
             if (game==null)
             {
@@ -28,14 +28,15 @@ namespace GameReviewSite.Core.Services
             return true;
         }
 
-        public string AddReviewToGame(string userId, string cardId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public async Task<bool> CreateGame(AddGameViewModel model)
+        public async Task<bool> CreateGame(AddGameViewModel model) //UnitTests Done
         {
             var tags = this.data.Tags.ToList();
+
+            if (model==null)
+            {
+                throw new ArgumentNullException("The model is null");
+            }
+
             if (await GameAlreadyExist(model.Name))
             {
                 return false;
@@ -56,24 +57,21 @@ namespace GameReviewSite.Core.Services
 
             return true;
         }
-        public async Task<bool> DeleteGame(string gameid)
-        {
-            var game = data.Games.FirstOrDefault(x=>x.Id==gameid);
-            if (game==null)
-            {
-                return false;
-            }
-            data.Games.Remove(game);
-            await data.SaveChangesAsync();
-            return true;
-        }
 
-        public Task<bool> AddReviewToGame(string gameId)
-        {
-            throw new NotImplementedException();
-        }
+        //public async Task<bool> DeleteGame(string gameid)
+        //{
+        //    var game = data.Games.FirstOrDefault(x=>x.Id==gameid);
+        //
+        //    if (game==null)
+        //    {
+        //        return false;
+        //    }
+        //    data.Games.Remove(game);
+        //    await data.SaveChangesAsync();
+        //    return true;
+        //}
 
-        public async Task<IEnumerable<AllGamesViewModel>> GetGames()
+        public async Task<IEnumerable<AllGamesViewModel>> GetGames() //UnitTests Done
         {
             return await repo.All<Game>()
                 .Select(x => new AllGamesViewModel()
@@ -92,7 +90,7 @@ namespace GameReviewSite.Core.Services
                 .OrderByDescending(x=>x.Rating)
                 .ToListAsync();
         }
-        public async Task<IEnumerable<ManageGamesViewModel>> GetGamesToManage()
+        public async Task<IEnumerable<ManageGamesViewModel>> GetGamesToManage() //UnitTests Done
         {
             return await repo.All<Game>()
                 .Select(x => new ManageGamesViewModel()
@@ -108,14 +106,15 @@ namespace GameReviewSite.Core.Services
                 .ToListAsync();
         }
 
-        public async Task<Game> GetGameForEdit(string id)
+        public async Task<Game> GetGameForEdit(string id) //UnitTests Done
         {
             var game = data.Games.Where(x => x.Id == id)
                 .Include(x => x.Tags)
                 .FirstOrDefault();
+
             if (game == null)
             {
-                throw new ArgumentNullException(nameof(game));
+                throw new ArgumentNullException($"Game doesnt exits");
             }
 
             var foundGame = new Game()
@@ -133,25 +132,34 @@ namespace GameReviewSite.Core.Services
 
             return foundGame;
         }
-        public async Task<bool> UpdateGame(AddGameViewModel model)
+        public async Task<bool> UpdateGame(AddGameViewModel model) //UnitTests Done
         {
             bool result = false;
 
-            var game = await repo.GetByIdAsync<Game>(model.Id);
-
-            if (game != null)
+            try
             {
-                game.Name = model.Name;
-                game.Image = model.Image;
-                game.ReleaseDate = model.ReleaseDate;
-                game.Price = model.Price;
-                game.Developer = model.Developer;
-                game.Publisher = model.Publisher;
-                game.Description = model.Description;
-                
-                await repo.SaveChangesAsync();
-                result = true;
+                var game = await repo.GetByIdAsync<Game>(model.Id);
+
+                if (game != null)
+                {
+                    game.Name = model.Name;
+                    game.Image = model.Image;
+                    game.ReleaseDate = model.ReleaseDate;
+                    game.Price = model.Price;
+                    game.Developer = model.Developer;
+                    game.Publisher = model.Publisher;
+                    game.Description = model.Description;
+
+                    await repo.SaveChangesAsync();
+                    result = true;
+                }
             }
+            catch (Exception)
+            {
+
+                throw new ArgumentNullException("Game doesnt exits");
+            }
+
             return result;
         }
 
@@ -170,7 +178,7 @@ namespace GameReviewSite.Core.Services
             return false;
         }
 
-        public async Task<GameDetailsViewModel> GetGameById(string id)
+        public async Task<GameDetailsViewModel> GetGameById(string id) //UnitTests Done
         {
                 var game = await data.Games.Where(x => x.Id == id)
                     .Include(x => x.Reviews)
@@ -179,7 +187,7 @@ namespace GameReviewSite.Core.Services
 
                 if (game == null)
                 {
-                    throw new ArgumentNullException(nameof(game));
+                    throw new ArgumentNullException("Game doesn't exits");
                 }
 
                 StringBuilder sb = new StringBuilder();

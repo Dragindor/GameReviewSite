@@ -14,5 +14,6 @@ namespace GameReviewSite.Core.Contracts
         Task<bool> UpdateTag(Tag tag);
         Task<bool> RemoveFromTagsAsync(Game game, List<Tag> tags);
         Task<bool> AddToTagsAsync(Game game, List<AddTagToGame> model);
+        Task<bool> TagAlreadyExist(string tagName);
     }
 }

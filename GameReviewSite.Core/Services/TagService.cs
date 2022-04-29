@@ -57,6 +57,15 @@ namespace GameReviewSite.Core.Services
 
         public async Task<bool> CreateTag(string name)
         {
+            if (name==null)
+            {
+                return false;
+            }
+            else if (await TagAlreadyExist(name))
+            {
+                return false;
+            }
+
             var tag = new Tag()
             { Name = name };
             await data.Tags.AddAsync(tag);
@@ -70,7 +79,7 @@ namespace GameReviewSite.Core.Services
 
             if (tag==null)
             {
-                throw new ArgumentNullException(nameof(tag));
+                throw new ArgumentNullException($"The tag with id:{id} was not found.");
             }
 
             var foundTag = new Tag()
@@ -104,6 +113,17 @@ namespace GameReviewSite.Core.Services
             }
 
             return result;
+        }
+        public async Task<bool> TagAlreadyExist(string tagName)
+        {
+            var tag = await data.Tags.FirstOrDefaultAsync(x => x.Name == tagName);
+
+            if (tag == null)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

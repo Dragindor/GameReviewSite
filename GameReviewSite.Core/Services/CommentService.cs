@@ -13,7 +13,7 @@ namespace GameReviewSite.Core.Services
             data = _data;
         }
 
-        public async Task<bool> AddCommentToReview(Comment model)
+        public async Task<bool> AddCommentToReview(Comment model) //UnitTests Done
         {
             var review = await data.Reviews.Where(x => x.Id == model.ReviewId)
                 .FirstOrDefaultAsync();

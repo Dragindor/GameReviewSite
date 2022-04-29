@@ -14,7 +14,7 @@ namespace GameReviewSite.Core.Services
             data = _data;
         }
 
-        public async Task<bool> AddReviewToGame(Review model)
+        public async Task<bool> AddReviewToGame(Review model) //UnitTests Done
         {
             var game = await data.Games.Where(x => x.Id == model.GameId)
                 .Include(x => x.Reviews)
@@ -59,7 +59,7 @@ namespace GameReviewSite.Core.Services
             
         }
 
-        public async Task<IEnumerable<RecentReviewsViewModel>> GetRecentReviews()
+        public async Task<IEnumerable<RecentReviewsViewModel>> GetRecentReviews() 
         {
             var reviews = data.Reviews
                 .Include(x => x.Comments)
@@ -82,18 +82,18 @@ namespace GameReviewSite.Core.Services
             return reviews;
         }
 
-        public async Task<Review> GetReviewById(string id)
+        public async Task<Review> GetReviewById(string id) //UnitTests Done
         {
-            var reviews = await data.Reviews
+            var review = await data.Reviews
                 .Include(x => x.Comments)
                 .Include(x=>x.User)
                 .Where(x => x.Id==id)
                 .FirstOrDefaultAsync();
 
-            return reviews;
+            return review;
         }
 
-        public async Task<IEnumerable<Review>> GetReviews()
+        public async Task<IEnumerable<Review>> GetReviews()//UnitTests Done
         {
             var reviews = await data.Reviews
                 .Include(x => x.Comments)
@@ -104,7 +104,7 @@ namespace GameReviewSite.Core.Services
             return reviews;
         }
 
-        public async Task<List<AllGameReviewsViewModel>> GetReviewsByGame(string id)
+        public async Task<List<AllGameReviewsViewModel>> GetReviewsByGame(string id)//UnitTests Done
         {
             var reviews = await data.Reviews
                 .Include(x=>x.User)

@@ -1,10 +1,11 @@
-﻿using GameReviewSite.Infrastructure.Data;
+﻿
+using GameReviewSite.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace SiteTests.Mocking
+namespace SiteTests.Mock
 {
-    public static class Database
+    public static class DataBaseMock
     {
         public static ApplicationDbContext Instance
         {

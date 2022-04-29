@@ -12,7 +12,7 @@ namespace GameReviewSite.Infrastructure.Data.Identity
         [StringLength(50)]
         public string? LastName { get; set; }
         
-        public byte[] ProfilePicture { get; set; }
+        public byte[]? ProfilePicture { get; set; }
 
         public ICollection<Review> Reviews { get; set; } = new HashSet<Review>();
         public ICollection<Comment> Comments { get; set; } = new HashSet<Comment>();

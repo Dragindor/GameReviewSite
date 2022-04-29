@@ -13,9 +13,9 @@ namespace GameReviewSite.Core.Services
             data = _data;
         }
 
-        public async Task<bool> AddForumMessage(ForumMessage model, string userId)
+        public async Task<bool> AddForumMessage(ForumMessage model, string userId) //UnitTestsDone
         {
-            try
+            if (model != null && userId != null)
             {
                 ForumMessage forum = new ForumMessage()
                 {
@@ -28,14 +28,13 @@ namespace GameReviewSite.Core.Services
                 await data.SaveChangesAsync();
                 return true;
             }
-            catch (Exception)
+            else
             {
-
                 return false;
             }
         }
 
-        public async Task<IEnumerable<ForumMessageViewModel>> GetMessages()
+        public async Task<IEnumerable<ForumMessageViewModel>> GetMessages() //UnitTestsDone
         {
             var reviews = await data.ForumMessages
                 .Include(x => x.User)

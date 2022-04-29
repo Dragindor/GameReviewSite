@@ -6,9 +6,9 @@ namespace GameReviewSite.Core.Contracts
     public interface IGameService
     {     
         Task<bool> CreateGame(AddGameViewModel model);       
-        Task<bool> DeleteGame(string gameid);
-        Task<bool> AddReviewToGame(string gameId);
+        //Task<bool> DeleteGame(string gameid);
         Task<bool> HasTag(Game game, string TagName);
+        Task<bool> GameAlreadyExist(string name);
         Task<IEnumerable<AllGamesViewModel>> GetGames();
         Task<IEnumerable<AllGamesViewModel>> GetRecentGames();
         Task<IEnumerable<ManageGamesViewModel>> GetGamesToManage();
