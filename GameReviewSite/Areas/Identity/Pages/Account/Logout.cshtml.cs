@@ -30,6 +30,7 @@ namespace GameReviewSite.Areas.Identity.Pages.Account
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
             {
+                returnUrl = "/Home/Index";
                 return LocalRedirect(returnUrl);
             }
             else
