@@ -61,7 +61,7 @@ namespace GameReviewSite.Core.Services
 
         public async Task<IEnumerable<RecentReviewsViewModel>> GetRecentReviews()
         {
-            var reviews = await data.Reviews
+            var reviews = data.Reviews
                 .Include(x => x.Comments)
                 .Include(x => x.Game)
                 .Select(x => new RecentReviewsViewModel
@@ -75,7 +75,9 @@ namespace GameReviewSite.Core.Services
                     Rating = x.Rating,
                     commentsCount = x.Comments.Count()
                 })
-                .ToListAsync();
+                .ToList()
+                .TakeLast(4)
+                .ToList();
 
             return reviews;
         }

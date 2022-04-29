@@ -227,8 +227,9 @@ namespace GameReviewSite.Core.Services
                     ReleaseDate = x.ReleaseDate,
                     Tag = x.Tags.Select(x => x.Name).FirstOrDefault(),
                     ReviewsCount = x.Reviews.Count()
-                }).ToList()
-                .TakeLast(3)
+                })
+                .OrderByDescending(x=>x.Rating)
+                .Take(3)
                 .ToList();
             return recentGames;           
         }
