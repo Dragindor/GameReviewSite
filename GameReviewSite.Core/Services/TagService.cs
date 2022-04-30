@@ -98,7 +98,6 @@ namespace GameReviewSite.Core.Services
             return tags;
         }
 
-
         public async Task<bool> UpdateTag(Tag tag)
         {
             bool result = false;
@@ -114,6 +113,7 @@ namespace GameReviewSite.Core.Services
 
             return result;
         }
+
         public async Task<bool> TagAlreadyExist(string tagName)
         {
             var tag = await data.Tags.FirstOrDefaultAsync(x => x.Name == tagName);

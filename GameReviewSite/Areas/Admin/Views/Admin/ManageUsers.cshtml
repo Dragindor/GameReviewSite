@@ -40,8 +40,8 @@
                                 <td>@user.LastName</td>
                                 <td>@user.Email</td>
                                 <td>
-                                    <a asp-area="admin" asp-action="edit" asp-controller="admin" asp-route-id="@user.UserId" class="btn btn-block btn-outline-info btn-xs">Edit</a>
-                                    <a asp-area="admin" asp-action="roles" asp-controller="admin" asp-route-id="@user.UserId" class="btn btn-block btn-outline-warning btn-xs">Roles</a>
+                                    <a asp-area="admin" asp-action="Edit" asp-controller="admin" asp-route-id="@user.Id" class="btn btn-block btn-outline-info btn-xs">Edit</a>
+                                    <a asp-area="admin" asp-action="roles" asp-controller="admin" asp-route-id="@user.Id" class="btn btn-block btn-outline-warning btn-xs">Roles</a>
                                 </td>
                             </tr>
                         }

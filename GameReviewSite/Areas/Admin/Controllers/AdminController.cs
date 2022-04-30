@@ -43,10 +43,9 @@ namespace GameReviewSite.Areas.Admin.Controllers
             var user = await service.GetUserById(id);
             var model = new RolesManagementViewModel()
             {
-                UserId = user.Id,
+                Id = user.Id,
                 UserName = user.UserName
             };
-
 
             ViewBag.RoleItems = roleManager.Roles
                 .ToList()
@@ -63,7 +62,7 @@ namespace GameReviewSite.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Roles(RolesManagementViewModel model)
         {
-            var user = await service.GetUserById(model.UserId);
+            var user = await service.GetUserById(model.Id);
             var userRoles = await userManager.GetRolesAsync(user);
             await userManager.RemoveFromRolesAsync(user, userRoles);
 
@@ -85,18 +84,16 @@ namespace GameReviewSite.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UserEditViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
 
             if (await service.UpdateUser(model))
             {
                 ViewData[MessageConstants.SuccessMessage] = "Успешен запис!";
+                return RedirectToAction(nameof(ManageUsers));
             }
             else
             {
                 ViewData[MessageConstants.ErrorMessage] = "Възникна грешка!";
+                return RedirectToAction(nameof(ManageUsers));
             }
 
             return View(model);

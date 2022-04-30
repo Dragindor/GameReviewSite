@@ -26,7 +26,7 @@ namespace GameReviewSite.Core.Services
 
             return new UserEditViewModel()
             {
-                UserId = user.Id,
+                Id = user.Id,
                 UserName = user.UserName
             };
         }
@@ -36,7 +36,7 @@ namespace GameReviewSite.Core.Services
             return await repo.All<ApplicationUser>()
                 .Select(user => new UserListViewModel()
                 {
-                    UserId = user.Id,
+                    Id = user.Id,
                     UserName = user.UserName,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
@@ -48,7 +48,7 @@ namespace GameReviewSite.Core.Services
         public async Task<bool> UpdateUser(UserEditViewModel model)
         {
             bool result = false;
-            var user = await repo.GetByIdAsync<ApplicationUser>(model.UserId);
+            var user = await repo.GetByIdAsync<ApplicationUser>(model.Id);
 
             if (user != null)
             {
